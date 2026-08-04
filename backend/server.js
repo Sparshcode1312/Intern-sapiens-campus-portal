@@ -54,35 +54,19 @@ app.get('/api/health', (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-
 const seedUsers = async () => {
   if (process.env.SEED_DEMO_USERS !== 'true') {
+    console.log('Demo user seeding disabled.');
     return;
   }
 
-  const count = await User.countDocuments();
-
-  if (count > 0) {
-    console.log('Users already exist. Demo seeding skipped.');
-    return;
-  }
-
-  const demoPassword = process.env.DEMO_PASSWORD;
-
-  if (!demoPassword) {
-    throw new Error(
-      'DEMO_PASSWORD is required when SEED_DEMO_USERS=true'
-    );
-  }
-
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(demoPassword, salt);
+  const demoPassword = process.env.DEMO_PASSWORD || 'password123';
+  const hashedPassword = await bcrypt.hash(demoPassword, 10);
 
   const users = [
     {
       name: 'John Centre',
       email: 'centre@sapiens.edu',
-      password: hashedPassword,
       role: 'Centre Head',
       centreName: 'SGS Bharatpur',
       designationLabel: 'Centre Head - SGS Bharatpur',
@@ -90,7 +74,6 @@ const seedUsers = async () => {
     {
       name: 'Jane Cluster',
       email: 'cluster@sapiens.edu',
-      password: hashedPassword,
       role: 'Cluster Manager',
       centreName: 'North Region',
       designationLabel: 'Cluster Manager - North',
@@ -98,16 +81,31 @@ const seedUsers = async () => {
     {
       name: 'Michael Director',
       email: 'director@sapiens.edu',
-      password: hashedPassword,
       role: 'Director',
       centreName: 'HQ',
       designationLabel: 'Director',
     },
   ];
 
-  await User.insertMany(users);
-  console.log('Demo users seeded successfully.');
+  for (const user of users) {
+    await User.updateOne(
+      { email: user.email },
+      {
+        $set: {
+          ...user,
+          password: hashedPassword,
+        },
+      },
+      { upsert: true }
+    );
+  }
+
+  console.log('Demo users created or updated successfully.');
 };
+
+
+  
+    
 
 const startServer = async () => {
   try {
