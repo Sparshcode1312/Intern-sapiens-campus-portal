@@ -108,10 +108,11 @@ const DashboardLayout = () => {
               {user?.email}
             </span>
 
-            <span className="user-role-text">
-              {user?.centreName || 'Sapiens Campus'} ·{' '}
-              {user?.role}
-            </span>
+           <span className="user-role-text">
+  {user?.centreName
+    ? `${user.centreName} · ${user.role}`
+    : user?.role}
+</span>
           </div>
 
           <button
