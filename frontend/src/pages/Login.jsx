@@ -15,6 +15,14 @@ const roleToPath = {
   Accounts: '/dashboard/accounts',
 };
 
+const campusOptions = [
+  'RIET',
+  'SHS Dhawas',
+  'SGS Bharatpur',
+  'SJS Gandhipath',
+  'SJS Hawa Sadak',
+];
+
 const Login = () => {
   const [activeTab, setActiveTab] = useState('login');
   const [showPassword, setShowPassword] = useState(false);
@@ -24,17 +32,18 @@ const Login = () => {
     password: '',
   });
 
-  const [signupData, setSignupData] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
+ const [signupData, setSignupData] = useState({
+  name: '',
+  email: '',
+  password: '',
+  campus: '',
+});
 
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { login } = useContext(AuthContext);
+  const { login, register } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const changeTab = (tab) => {
@@ -106,27 +115,57 @@ const Login = () => {
     }
   };
 
-  const handleSignup = (event) => {
-    event.preventDefault();
+ const handleSignup = async (event) => {
+  event.preventDefault();
 
-    if (
-      !signupData.name.trim() ||
-      !signupData.email.trim() ||
-      !signupData.password
-    ) {
-      setError('Please complete all signup fields.');
-      return;
-    }
+  const name = signupData.name.trim();
+  const email = signupData.email.trim().toLowerCase();
+  const password = signupData.password;
+  const campus = signupData.campus;
 
-    /*
-      Your current backend ZIP does not contain a public registration endpoint.
-      This prevents the page from pretending that an account was created.
-    */
+  if (!name || !email || !password || !campus) {
+    setError('Please complete all fields and select your campus.');
+    return;
+  }
+
+  if (password.length < 8) {
+    setError('Password must contain at least 8 characters.');
+    return;
+  }
+
+  try {
+    setIsSubmitting(true);
     setError('');
-    setSuccessMessage(
-      'Account creation is managed by the campus administrator. Please contact the administrator for access.'
+    setSuccessMessage('');
+
+    const newUser = await register({
+      name,
+      email,
+      password,
+      campus,
+    });
+
+    setSuccessMessage('Account created successfully.');
+
+    const dashboardPath =
+      roleToPath[newUser.role] || '/dashboard/centre-head';
+
+    window.setTimeout(() => {
+      navigate(dashboardPath, { replace: true });
+    }, 600);
+  } catch (requestError) {
+    console.error('Registration failed:', requestError);
+
+    setError(
+      requestError.response?.data?.message ||
+        requestError.message ||
+        'Unable to create the account.'
     );
-  };
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+  
 
   return (
     <main className="auth-page">
@@ -281,76 +320,122 @@ const Login = () => {
               </p>
             </form>
           ) : (
-            <form className="auth-form" onSubmit={handleSignup}>
-              <div className="auth-field">
-                <label htmlFor="signup-name">Full Name</label>
+           <form className="auth-form" onSubmit={handleSignup}>
+  <div className="auth-field">
+    <label htmlFor="signup-name">Full Name</label>
 
-                <input
-                  id="signup-name"
-                  name="name"
-                  type="text"
-                  value={signupData.name}
-                  onChange={handleSignupChange}
-                  placeholder="Enter your full name"
-                  autoComplete="name"
-                  required
-                />
-              </div>
+    <input
+      id="signup-name"
+      name="name"
+      type="text"
+      value={signupData.name}
+      onChange={handleSignupChange}
+      placeholder="Enter your full name"
+      autoComplete="name"
+      disabled={isSubmitting}
+      required
+    />
+  </div>
 
-              <div className="auth-field">
-                <label htmlFor="signup-email">Email</label>
+  <div className="auth-field">
+    <label htmlFor="signup-email">Email</label>
 
-                <input
-                  id="signup-email"
-                  name="email"
-                  type="email"
-                  value={signupData.email}
-                  onChange={handleSignupChange}
-                  placeholder="you@sapiens.edu"
-                  autoComplete="email"
-                  required
-                />
-              </div>
+    <input
+      id="signup-email"
+      name="email"
+      type="email"
+      value={signupData.email}
+      onChange={handleSignupChange}
+      placeholder="you@sapiens.edu"
+      autoComplete="email"
+      disabled={isSubmitting}
+      required
+    />
+  </div>
 
-              <div className="auth-field">
-                <label htmlFor="signup-password">Password</label>
+  <div className="auth-field">
+    <label htmlFor="signup-password">Password</label>
 
-                <div className="auth-password-wrapper">
-                  <input
-                    id="signup-password"
-                    name="password"
-                    type={showPassword ? 'text' : 'password'}
-                    value={signupData.password}
-                    onChange={handleSignupChange}
-                    placeholder="Create a password"
-                    autoComplete="new-password"
-                    minLength={8}
-                    required
-                  />
+    <div className="auth-password-wrapper">
+      <input
+        id="signup-password"
+        name="password"
+        type={showPassword ? 'text' : 'password'}
+        value={signupData.password}
+        onChange={handleSignupChange}
+        placeholder="Create a password"
+        autoComplete="new-password"
+        minLength={8}
+        disabled={isSubmitting}
+        required
+      />
 
-                  <button
-                    type="button"
-                    className="auth-password-toggle"
-                    onClick={() =>
-                      setShowPassword((previousValue) => !previousValue)
-                    }
-                    aria-label={
-                      showPassword ? 'Hide password' : 'Show password'
-                    }
-                  >
-                    {showPassword ? (
-                      <EyeOff size={19} />
-                    ) : (
-                      <Eye size={19} />
-                    )}
-                  </button>
-                </div>
-              </div>
+      <button
+        type="button"
+        className="auth-password-toggle"
+        onClick={() =>
+          setShowPassword((previousValue) => !previousValue)
+        }
+        aria-label={
+          showPassword ? 'Hide password' : 'Show password'
+        }
+      >
+        {showPassword ? (
+          <EyeOff size={19} />
+        ) : (
+          <Eye size={19} />
+        )}
+      </button>
+    </div>
+  </div>
 
-              <button type="submit" className="auth-submit-button">
-                Request Access
-              </button>
-            </form>
+  <div className="auth-field">
+    <label htmlFor="signup-campus">Campus</label>
+
+    <div className="auth-select-wrapper">
+      <select
+        id="signup-campus"
+        name="campus"
+        value={signupData.campus}
+        onChange={handleSignupChange}
+        disabled={isSubmitting}
+        required
+      >
+        <option value="" disabled>
+          Choose your campus
+        </option>
+
+        {campusOptions.map((campus) => (
+          <option key={campus} value={campus}>
+            {campus}
+          </option>
+        ))}
+      </select>
+
+      <span className="auth-select-arrow" aria-hidden="true">
+       ⌄
+      </span>
+    </div>
+  </div>
+
+  <button
+    type="submit"
+    className="auth-submit-button"
+    disabled={isSubmitting}
+  >
+    {isSubmitting ? (
+      <>
+        <LoaderCircle
+          size={20}
+          className="auth-spinner"
+        />
+        Creating account...
+      </>
+    ) : (
+      'Create Account'
+    )}
+  </button>
+</form>
           )}
         </div>
       </section>
