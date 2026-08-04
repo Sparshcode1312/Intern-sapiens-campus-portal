@@ -1,7 +1,15 @@
 import React, { useContext } from 'react';
-import { Outlet, useNavigate, useLocation } from 'react-router-dom';
+import {
+  FilePlus2,
+  LayoutDashboard,
+  LogOut,
+} from 'lucide-react';
+import {
+  Outlet,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { LogOut, LayoutDashboard, FilePlus, Shield } from 'lucide-react';
 import '../styles/dashboard.css';
 
 const DashboardLayout = () => {
@@ -9,32 +17,86 @@ const DashboardLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const isNewRequirementPage =
+    location.pathname === '/dashboard/new-requirement';
+
+  const isDashboardPage =
+    location.pathname.startsWith('/dashboard/') &&
+    !isNewRequirementPage;
+
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate('/login', { replace: true });
+  };
+
+  const openDashboard = () => {
+    if (user?.role === 'Centre Head') {
+      navigate('/dashboard/centre-head');
+      return;
+    }
+
+    const rolePathMap = {
+      'Cluster Manager': '/dashboard/cluster-manager',
+      'Department Head': '/dashboard/department-head',
+      'Regional Head': '/dashboard/regional-head',
+      Director: '/dashboard/director',
+      Chairperson: '/dashboard/chairperson',
+      'Purchase Manager': '/dashboard/purchase-manager',
+      Accounts: '/dashboard/accounts',
+    };
+
+    navigate(rolePathMap[user?.role] || '/login');
   };
 
   return (
     <div className="dashboard-wrapper">
       <header className="dashboard-header">
-        <div className="header-left">
-          <div className="logo-icon">
-            <Shield size={20} color="#F4B400" />
+        <button
+          type="button"
+          className="header-left header-brand-button"
+          onClick={openDashboard}
+          aria-label="Open dashboard"
+        >
+          <div className="dashboard-logo">
+            <img
+              src="/sapiens-logo.png"
+              alt="Sapiens Group"
+            />
           </div>
+
           <div className="brand-text">
-            <span className="brand-title">SAPIENS GROUP</span>
-            <span className="brand-subtitle">Campus Portal</span>
+            <span className="brand-title">
+              SAPIENS GROUP
+            </span>
+            <span className="brand-subtitle">
+              Campus Portal
+            </span>
           </div>
-        </div>
-        
+        </button>
+
         <nav className="header-center">
-          <button className={`nav-item ${location.pathname.includes('/dashboard') ? 'active' : ''}`}>
+          <button
+            type="button"
+            className={`nav-item ${
+              isDashboardPage ? 'active' : ''
+            }`}
+            onClick={openDashboard}
+          >
             <LayoutDashboard size={18} />
             Dashboard
           </button>
+
           {user?.role === 'Centre Head' && (
-            <button className="nav-item">
-              <FilePlus size={18} />
+            <button
+              type="button"
+              className={`nav-item ${
+                isNewRequirementPage ? 'active' : ''
+              }`}
+              onClick={() =>
+                navigate('/dashboard/new-requirement')
+              }
+            >
+              <FilePlus2 size={18} />
               New Requirement
             </button>
           )}
@@ -42,14 +104,28 @@ const DashboardLayout = () => {
 
         <div className="header-right">
           <div className="user-profile-info">
-            <span className="user-email">{user?.email}</span>
-            <span className="user-role-text">— {user?.role}</span>
+            <span className="user-email">
+              {user?.email}
+            </span>
+
+            <span className="user-role-text">
+              {user?.centreName || 'Sapiens Campus'} ·{' '}
+              {user?.role}
+            </span>
           </div>
-          <button onClick={handleLogout} className="logout-button" title="Logout">
+
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="logout-button"
+            title="Logout"
+            aria-label="Logout"
+          >
             <LogOut size={20} />
           </button>
         </div>
       </header>
+
       <main className="dashboard-content">
         <Outlet />
       </main>
