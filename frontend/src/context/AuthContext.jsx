@@ -64,6 +64,29 @@ export const AuthProvider = ({ children }) => {
     return response.data;
   };
 
+  const register = async ({
+  name,
+  email,
+  password,
+  campus,
+}) => {
+  const response = await axios.post(
+    `${API_BASE_URL}/api/auth/register`,
+    {
+      name: name.trim(),
+      email: email.trim().toLowerCase(),
+      password,
+      centreName: campus,
+      role: 'Centre Head',
+    }
+  );
+
+  localStorage.setItem('token', response.data.token);
+  setUser(response.data);
+
+  return response.data;
+};
+
   const logout = () => {
     localStorage.removeItem('token');
     setUser(null);
@@ -75,6 +98,7 @@ export const AuthProvider = ({ children }) => {
         user,
         loading,
         login,
+        register,
         logout,
       }}
     >
