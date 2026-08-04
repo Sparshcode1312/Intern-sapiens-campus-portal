@@ -131,19 +131,19 @@ const Login = () => {
   return (
     <main className="auth-page">
       <section className="auth-brand-panel">
-        <div className="auth-brand-top">
-       <div className="auth-logo">
-  <img
-    src="/sapiens-logo.png"
-    alt="Sapiens Group of Institutes"
-  />
-</div>
+       <div className="auth-brand-top">
+  <div className="auth-logo">
+    <img
+      src="/sapiens-logo.png"
+      alt="Sapiens Group of Institutes"
+    />
+  </div>
 
-          <div>
-            <p className="auth-brand-name">SAPIENS GROUP</p>
-            <h2 className="auth-brand-type">of Institutes</h2>
-          </div>
-        </div>
+  <div className="auth-brand-text">
+    <p className="auth-brand-name">SAPIENS GROUP</p>
+    <h2 className="auth-brand-type">of Institutes</h2>
+  </div>
+</div>
 
         <div className="auth-hero-content">
           <p className="auth-eyebrow">Campus Head</p>
