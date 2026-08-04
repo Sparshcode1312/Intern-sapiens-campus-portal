@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }) => {
     const response = await axios.post(
       `${API_BASE_URL}/api/auth/login`,
       {
-        email,
+        email: email.trim().toLowerCase(),
         password,
       }
     );
@@ -82,3 +82,8 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+
+    
+  
+  
+   
