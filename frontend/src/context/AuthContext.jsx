@@ -8,7 +8,7 @@ import axios from 'axios';
 export const AuthContext = createContext();
 
 const API_BASE_URL =
-  import.meta.env.VITE_API_URL || 'http://localhost:5000';
+   'https://intern-sapiens-campus-portal.onrender.com';
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
