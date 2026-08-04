@@ -6,6 +6,7 @@ import DashboardLayout from './components/DashboardLayout';
 import Login from './pages/Login';
 import CentreHeadDashboard from './pages/dashboards/CentreHeadDashboard';
 import ApproverDashboard from './pages/dashboards/ApproverDashboard';
+import NewRequirement from './pages/NewRequirement';
 
 function App() {
   return (
@@ -25,6 +26,16 @@ function App() {
                 </ProtectedRoute>
               } 
             />
+            
+            <Route
+  path="new-requirement"
+  element={
+    <ProtectedRoute allowedRoles={['Centre Head']}>
+      <NewRequirement />
+    </ProtectedRoute>
+  }
+/>
+            
             <Route 
               path="cluster-manager" 
               element={
