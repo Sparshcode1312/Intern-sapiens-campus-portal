@@ -27,9 +27,15 @@ const Login = () => {
       const user = await login(email, password);
       const dashboardPath = roleToPath[user.role] || '/';
       navigate(dashboardPath);
-    } catch (err) {
-      setError('Invalid email or password');
-    }
+    } catch (error) {
+  console.error('Login failed:', error);
+
+  setError(
+    error.response?.data?.message ||
+    error.message ||
+    'Unable to connect to the server'
+  );
+}
   };
 
   return (
