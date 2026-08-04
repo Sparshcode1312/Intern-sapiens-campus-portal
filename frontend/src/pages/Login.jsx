@@ -132,9 +132,12 @@ const Login = () => {
     <main className="auth-page">
       <section className="auth-brand-panel">
         <div className="auth-brand-top">
-          <div className="auth-logo" aria-label="Sapiens Group logo">
-            <span className="auth-logo-emblem">SG</span>
-          </div>
+         <div className="auth-logo">
+  <img
+    src="/sapiens-logo.png"
+    alt="Sapiens Group of Institutes"
+  />
+</div>
 
           <div>
             <p className="auth-brand-name">SAPIENS GROUP</p>
