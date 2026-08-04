@@ -251,6 +251,13 @@
     transform 180ms ease;
 }
 
+.auth-logo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 7px;
+  object-fit: cover;
+}
+
 .auth-field input::placeholder {
   color: #8994a3;
 }
