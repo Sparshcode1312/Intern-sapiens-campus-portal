@@ -47,26 +47,8 @@ function App() {
               }
             />
 
-            {/* Regional Head Dashboard */}
-            <Route
-              path="regional-head"
-              element={
-                <ProtectedRoute allowedRoles={["Regional Head"]}>
-                  <RegionalDashboard />
-                </ProtectedRoute>
-              }
-            />
-
-            {/* Regional Head Notesheets */}
-            <Route
-              path="regional-head/notesheets"
-              element={
-                <ProtectedRoute allowedRoles={["Regional Head"]}>
-                  <Notesheets />
-                </ProtectedRoute>
-              }
-            />
-
+         
+              
             {/* Cluster Manager */}
             <Route
               path="cluster-manager"
@@ -128,6 +110,24 @@ function App() {
             />
 
           </Route>
+
+          <Route
+    path="/regional-head"
+    element={
+        <ProtectedRoute allowedRoles={["Regional Head"]}>
+            <RegionalDashboard />
+        </ProtectedRoute>
+    }
+/>
+
+<Route
+    path="/regional-head/notesheets"
+    element={
+        <ProtectedRoute allowedRoles={["Regional Head"]}>
+            <Notesheets />
+        </ProtectedRoute>
+    }
+/>
 
         </Routes>
       </Router>
