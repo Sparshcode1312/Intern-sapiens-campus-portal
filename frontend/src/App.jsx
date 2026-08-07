@@ -5,6 +5,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import DashboardLayout from './components/DashboardLayout';
 import Login from './pages/Login';
 import CentreHeadDashboard from './pages/dashboards/CentreHeadDashboard';
+import RegionalDashboard from "./pages/RegionalHead/RegionalDashboard";
 import ApproverDashboard from './pages/dashboards/ApproverDashboard';
 import NewRequirement from './pages/NewRequirement';
 
