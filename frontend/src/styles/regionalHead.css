@@ -1,0 +1,97 @@
+.regional-dashboard {
+  display: flex;
+  min-height: 100vh;
+  background: #f8f6f3;
+}
+
+.rh-sidebar {
+  width: 290px;
+  background: #121d3a;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.rh-logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 30px;
+}
+
+.logo-circle {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-circle img {
+  width: 34px;
+}
+
+.rh-logo h2 {
+  margin: 0;
+  font-size: 28px;
+  font-family: Georgia, serif;
+}
+
+.rh-logo span {
+  color: #d8a24b;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.rh-nav {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.rh-nav button {
+  height: 58px;
+  border: none;
+  background: transparent;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding-left: 28px;
+  cursor: pointer;
+  font-size: 17px;
+  transition: 0.2s;
+}
+
+.rh-nav button:hover {
+  background: rgba(255,255,255,.06);
+}
+
+.rh-nav .active {
+  background: #223156;
+  border-left: 4px solid #d89d3b;
+}
+
+.rh-user {
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding: 22px;
+}
+
+.rh-user p {
+  color: #cfcfcf;
+  margin-bottom: 18px;
+  font-size: 14px;
+}
+
+.logout-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
