@@ -52,11 +52,7 @@ body{
     grid-template-columns:2.2fr 1fr;
     gap:28px;
 }
-.dashboard-bottom{
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:24px;
-}
+
 
 .recent-card{
     background:white;
@@ -130,5 +126,40 @@ body{
 .hero-subtitle{
     font-size:19px;
     color:#667085;
+    line-height:1.6;
+}
+
+.view-btn{
+    background:none;
+    border:none;
+    cursor:pointer;
+    color:#16274D;
+    font-weight:500;
+    font-size:15px;
+}
+
+.empty-icon{
+    font-size:34px;
+    margin-bottom:16px;
+}
+
+.recent-card h3,
+.department-card h3{
+    font-family:"Cormorant Garamond", serif;
+    font-size:24px;
+    color:#16274D;
+    font-weight:600;
+}
+
+.empty-box h4{
+    margin-top:12px;
+    font-size:28px;
+    color:#16274D;
+}
+
+.empty-box p{
+    margin-top:8px;
+    max-width:360px;
+    color:#7B7B7B;
     line-height:1.6;
 }
