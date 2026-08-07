@@ -14,14 +14,18 @@ body{
 
 .rh-page{
     display:flex;
-    min-height:100vh;
-    background:#F7F5F2;
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+    background:#F6F4EF;
 }
 
 .rh-content{
     flex:1;
-    background:#F8F6F2;
-    padding:34px 48px;
+    display:flex;
+    flex-direction:column;
+    padding:48px 56px;
+    background:#F6F4EF;
     overflow-y:auto;
 }
 
@@ -29,46 +33,50 @@ body{
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
-    margin-bottom:38px;
+    margin-bottom:42px;
 }
 
 .rh-title-small{
-    color:#B88746;
+    color:#B68A46;
     font-size:13px;
     font-weight:600;
     letter-spacing:5px;
     text-transform:uppercase;
-    margin-bottom:12px;
+    margin-bottom:14px;
 }
 
 .rh-title{
-    font-family:'Cormorant Garamond',serif;
-    font-size:64px;
+    font-family:"Cormorant Garamond",serif;
+    font-size:62px;
     font-weight:600;
-    color:#0E2148;
-    line-height:1.05;
+    color:#16274D;
+    line-height:1;
+    margin:0;
 }
 
 .rh-subtitle{
-    margin-top:14px;
-    color:#5F6674;
+    margin-top:16px;
     font-size:18px;
-    line-height:1.5;
+    color:#69707D;
+    line-height:1.6;
+    max-width:650px;
 }
 
 .memo-btn{
-    background:#13264B;
+    background:#16274D;
     color:white;
     border:none;
     border-radius:12px;
-    height:52px;
-    padding:0 26px;
-    font-size:17px;
+    height:56px;
+    padding:0 28px;
+    font-size:16px;
     font-weight:600;
     cursor:pointer;
+    transition:.25s;
 }
+
 .memo-btn:hover{
-    background:#162E63;
+    background:#213766;
 }
 
 .stats-grid{
