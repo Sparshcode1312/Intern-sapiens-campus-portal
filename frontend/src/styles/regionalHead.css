@@ -20,8 +20,9 @@ body{
 
 .rh-content{
     flex:1;
-    padding:40px 52px;
-    overflow:auto;
+    background:#F8F6F2;
+    padding:34px 48px;
+    overflow-y:auto;
 }
 
 .rh-header{
