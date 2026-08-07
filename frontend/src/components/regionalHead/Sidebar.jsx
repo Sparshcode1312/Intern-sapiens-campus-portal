@@ -9,82 +9,43 @@ import {
 
 import "./Sidebar.css";
 
-const Sidebar = () => {
+const NAV_ITEMS = [
+  { label: "Overview", icon: LayoutDashboard, active: true },
+  { label: "Notesheets", icon: FileText },
+  { label: "New Memo", icon: FilePlus },
+  { label: "Approval Flow", icon: GitBranch },
+];
+
+const Sidebar = ({ userEmail = "testuser@gmail.com", onSignOut }) => {
   return (
     <aside className="rh-sidebar">
-
-      {/* Logo */}
-
       <div className="sidebar-logo">
-
         <div className="logo-circle">
-          S
+          <img src="/sapiens-logo.png" alt="Sapiens" />
         </div>
 
         <div>
-
           <h2>Sapiens</h2>
-
           <span>REGIONAL HEAD</span>
-
         </div>
-
       </div>
-
-      {/* Navigation */}
 
       <nav className="sidebar-menu">
-
-        <button className="active">
-
-          <LayoutDashboard size={18} />
-
-          Overview
-
-        </button>
-
-        <button>
-
-          <FileText size={18} />
-
-          Notesheets
-
-        </button>
-
-        <button>
-
-          <FilePlus size={18} />
-
-          New Memo
-
-        </button>
-
-        <button>
-
-          <GitBranch size={18} />
-
-          Approval Flow
-
-        </button>
-
+        {NAV_ITEMS.map(({ label, icon: Icon, active }) => (
+          <button key={label} className={active ? "active" : ""} type="button">
+            <Icon size={18} />
+            {label}
+          </button>
+        ))}
       </nav>
 
-      {/* Footer */}
-
       <div className="sidebar-footer">
-
-        <p>testuser@gmail.com</p>
-
-        <button>
-
-          <LogOut size={18} />
-
+        <p>{userEmail}</p>
+        <button type="button" onClick={onSignOut}>
+          <LogOut size={16} />
           Sign out
-
         </button>
-
       </div>
-
     </aside>
   );
 };
