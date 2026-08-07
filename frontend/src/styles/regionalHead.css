@@ -150,3 +150,53 @@
 .memo-btn:hover {
     background: #1a2e59;
 }
+
+/* ===========================
+   STAT CARDS
+=========================== */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 18px;
+    padding: 28px;
+    min-height: 145px;
+    border: 1px solid #ebe6df;
+    transition: .25s;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(0,0,0,.05);
+}
+
+.stat-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stat-title {
+    color: #6e7483;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.stat-icon {
+    color: #c9902e;
+}
+
+.stat-value {
+    margin-top: 28px;
+    font-size: 44px;
+    color: #142344;
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 600;
+}
