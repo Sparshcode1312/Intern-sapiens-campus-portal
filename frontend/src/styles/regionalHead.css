@@ -29,7 +29,7 @@ body{
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
-    margin-bottom:32px;
+    margin-bottom:38px;
 }
 
 .rh-title-small{
@@ -46,27 +46,27 @@ body{
     font-size:64px;
     font-weight:600;
     color:#0E2148;
-    line-height:1;
+    line-height:1.05;
 }
 
 .rh-subtitle{
-    margin-top:12px;
-    color:#6B7280;
+    margin-top:14px;
+    color:#5F6674;
     font-size:18px;
+    line-height:1.5;
 }
 
 .memo-btn{
-    background:#0E2148;
-    color:#fff;
+    background:#13264B;
+    color:white;
     border:none;
-    border-radius:14px;
-    padding:18px 30px;
-    font-size:16px;
+    border-radius:12px;
+    height:52px;
+    padding:0 26px;
+    font-size:17px;
     font-weight:600;
     cursor:pointer;
-    transition:.2s;
 }
-
 .memo-btn:hover{
     background:#162E63;
 }
