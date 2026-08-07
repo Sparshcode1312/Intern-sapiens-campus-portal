@@ -95,3 +95,58 @@
   cursor: pointer;
   font-size: 16px;
 }
+
+.dashboard-content {
+    flex: 1;
+    padding: 40px 50px;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.dashboard-subtitle {
+    color: #c9902e;
+    letter-spacing: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+}
+
+.dashboard-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 58px;
+    color: #12213f;
+    font-weight: 500;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.dashboard-description {
+    color: #6f7380;
+    font-size: 22px;
+    margin-top: 12px;
+}
+
+.memo-btn {
+    background: #12213f;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.25s ease;
+}
+
+.memo-btn:hover {
+    background: #1a2e59;
+}
