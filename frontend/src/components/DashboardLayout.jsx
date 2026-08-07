@@ -38,7 +38,7 @@ const DashboardLayout = () => {
     const rolePathMap = {
       'Cluster Manager': '/dashboard/cluster-manager',
       'Department Head': '/dashboard/department-head',
-      'Regional Head': '/dashboard/regional-head',
+      'Regional Head': '/regional-head',
       Director: '/dashboard/director',
       Chairperson: '/dashboard/chairperson',
       'Purchase Manager': '/dashboard/purchase-manager',
