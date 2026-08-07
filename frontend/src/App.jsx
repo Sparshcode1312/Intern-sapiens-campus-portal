@@ -53,14 +53,7 @@ function App() {
                 </ProtectedRoute>
               } 
             />
-           <Route
-  path="regional-head"
-  element={
-    <ProtectedRoute allowedRoles={['Regional Head']}>
-      <RegionalDashboard />
-    </ProtectedRoute>
-  }
-/>
+          
             <Route 
               path="director" 
               element={
@@ -94,6 +87,14 @@ function App() {
               } 
             />
           </Route>
+          <Route
+  path="/regional-head"
+  element={
+    <ProtectedRoute allowedRoles={["Regional Head"]}>
+      <RegionalDashboard />
+    </ProtectedRoute>
+  }
+/>
         </Routes>
       </Router>
     </AuthProvider>
