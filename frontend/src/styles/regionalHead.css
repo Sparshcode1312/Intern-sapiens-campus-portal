@@ -200,3 +200,7 @@
     font-family: "Cormorant Garamond", serif;
     font-weight: 600;
 }
+.highlighted-card {
+    border: 1.5px solid #d6a24c;
+}
+
