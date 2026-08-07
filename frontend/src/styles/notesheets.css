@@ -16,18 +16,24 @@ body{
 .notes-main{
     flex:1;
     margin-left:314px;
-    padding:48px;
     background:#F7F5F2;
     min-height:100vh;
-}
 
+    padding-top:40px;
+    padding-left:48px;
+    padding-right:48px;
+    padding-bottom:32px;
+
+    max-width:calc(100vw - 314px);
+}
 /* Header */
 
 .notes-header{
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
-    margin-bottom:28px;
+
+    margin-bottom:34px;
 }
 
 .notes-label{
@@ -40,57 +46,58 @@ body{
 
 .notes-title{
     font-family:"Cormorant Garamond",serif;
-    font-size:62px;
-    color:#16274D;
+    font-size:58px;
     font-weight:500;
-    line-height:1;
-    margin-bottom:12px;
+    color:#16274D;
+    line-height:1.05;
+
+    margin-bottom:10px;
 }
 
 .notes-subtitle{
     font-size:18px;
-    color:#667085;
-    line-height:1.5;
+    color:#6B7280;
+    line-height:1.6;
+    max-width:720px;
 }
 
 /* Right Buttons */
 
 .notes-actions{
     display:flex;
-    gap:14px;
+    gap:12px;
     align-items:center;
-    margin-top:16px;
+    margin-top:18px;
 }
 
 .filter-btn{
-    width:235px;
-    height:48px;
+    width:238px;
+    height:46px;
     background:#fff;
     border:1px solid #ECE7DF;
     border-radius:14px;
+    padding:0 18px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:0 18px;
-    cursor:pointer;
     font-size:16px;
     color:#16274D;
-    box-shadow:0 2px 10px rgba(0,0,0,.05);
+    cursor:pointer;
+    box-shadow:0 2px 8px rgba(0,0,0,.04);
 }
-
 .log-btn{
-    width:190px;
-    height:48px;
+    width:188px;
+    height:46px;
     background:#16274D;
+    color:white;
     border:none;
     border-radius:14px;
-    color:#fff;
-    font-size:16px;
-    font-weight:500;
     display:flex;
     justify-content:center;
     align-items:center;
     gap:10px;
+    font-size:16px;
+    font-weight:500;
     cursor:pointer;
 }
 
@@ -101,17 +108,15 @@ body{
 /* Main White Card */
 
 .notes-card{
-    background:#fff;
-    border-radius:24px;
-    min-height:520px;
+    background:white;
+    border-radius:22px;
     border:1px solid #ECE7DF;
-    box-shadow:0 4px 18px rgba(0,0,0,.05);
-
+    min-height:470px;
     display:flex;
     justify-content:center;
     align-items:center;
+    box-shadow:0 3px 14px rgba(0,0,0,.05);
 }
-
 /* Empty State */
 
 .empty-state{
