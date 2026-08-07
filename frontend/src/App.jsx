@@ -53,14 +53,14 @@ function App() {
                 </ProtectedRoute>
               } 
             />
-            <Route 
-              path="regional-head" 
-              element={
-                <ProtectedRoute allowedRoles={['Regional Head']}>
-                  <ApproverDashboard roleName="Regional Head" />
-                </ProtectedRoute>
-              } 
-            />
+           <Route
+  path="regional-head"
+  element={
+    <ProtectedRoute allowedRoles={['Regional Head']}>
+      <RegionalDashboard />
+    </ProtectedRoute>
+  }
+/>
             <Route 
               path="director" 
               element={
