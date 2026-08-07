@@ -17,6 +17,10 @@
   }
 }
 
+body {
+    font-family: "Inter", sans-serif;
+}
+
 .hero {
   position: relative;
 
