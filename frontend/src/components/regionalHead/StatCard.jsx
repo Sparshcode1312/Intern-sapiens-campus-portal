@@ -1,8 +1,8 @@
 import React from "react";
 
-const StatCard = ({ title, value, icon }) => {
+const StatCard = ({ title, value, icon, highlighted = false }) => {
   return (
-    <div className="stat-card">
+    <div className={`stat-card ${highlighted ? "highlighted-card" : ""}`}>
 
       <div className="stat-card-top">
         <span className="stat-title">{title}</span>
