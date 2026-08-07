@@ -2,62 +2,85 @@ import React from "react";
 import {
   LayoutDashboard,
   FileText,
-  FilePlus2,
+  FilePlus,
   GitBranch,
   LogOut,
 } from "lucide-react";
+
+import "./Sidebar.css";
 
 const Sidebar = () => {
   return (
     <aside className="rh-sidebar">
 
-      <div className="rh-logo">
+      {/* Logo */}
+
+      <div className="sidebar-logo">
 
         <div className="logo-circle">
-          <img
-            src="/logo.png"
-            alt="Sapiens"
-          />
+          S
         </div>
 
         <div>
+
           <h2>Sapiens</h2>
+
           <span>REGIONAL HEAD</span>
+
         </div>
 
       </div>
 
-      <nav className="rh-nav">
+      {/* Navigation */}
+
+      <nav className="sidebar-menu">
 
         <button className="active">
-          <LayoutDashboard size={20} />
-          <span>Overview</span>
+
+          <LayoutDashboard size={18} />
+
+          Overview
+
         </button>
 
         <button>
-          <FileText size={20} />
-          <span>Notesheets</span>
+
+          <FileText size={18} />
+
+          Notesheets
+
         </button>
 
         <button>
-          <FilePlus2 size={20} />
-          <span>New Memo</span>
+
+          <FilePlus size={18} />
+
+          New Memo
+
         </button>
 
         <button>
-          <GitBranch size={20} />
-          <span>Approval Flow</span>
+
+          <GitBranch size={18} />
+
+          Approval Flow
+
         </button>
 
       </nav>
 
-      <div className="rh-user">
+      {/* Footer */}
+
+      <div className="sidebar-footer">
 
         <p>testuser@gmail.com</p>
 
-        <button className="logout-btn">
+        <button>
+
           <LogOut size={18} />
+
           Sign out
+
         </button>
 
       </div>
@@ -67,4 +90,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
