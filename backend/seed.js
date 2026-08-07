@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const User = require('./models/User');
+const dotenv = require("dotenv");
+dotenv.config();
 
 const seedUsers = async () => {
   try {
-    await mongoose.connect('mongodb://localhost:27017/sapiens-portal');
+    await mongoose.connect(process.env.MONGO_URI);
     console.log('MongoDB Connected for Seeding');
 
     await User.deleteMany();

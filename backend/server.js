@@ -80,6 +80,13 @@ const seedUsers = async () => {
       centreName: 'HQ',
       designationLabel: 'Director',
     },
+    {
+  name: 'Regional Head',
+  email: 'regional@sapiens.edu',
+  role: 'Regional Head',
+  centreName: 'North Region',
+  designationLabel: 'Regional Head - North',
+},
   ];
 
   for (const user of users) {
