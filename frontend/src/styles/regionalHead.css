@@ -204,3 +204,87 @@
     border: 1.5px solid #d6a24c;
 }
 
+/* ===========================
+   BOTTOM SECTION
+=========================== */
+
+.dashboard-bottom {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 25px;
+}
+
+.recent-card,
+.department-card {
+    background: white;
+    border-radius: 18px;
+    padding: 28px;
+    border: 1px solid #ebe6df;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.section-header h3,
+.department-card h3 {
+    margin: 0;
+    font-size: 24px;
+    color: #142344;
+    font-family: "Cormorant Garamond", serif;
+}
+
+.view-all-btn {
+    border: none;
+    background: transparent;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    cursor: pointer;
+    color: #c9902e;
+    font-weight: 600;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 70px 0;
+}
+
+.empty-icon {
+    font-size: 52px;
+    margin-bottom: 20px;
+}
+
+.empty-state h4 {
+    margin-bottom: 10px;
+    color: #142344;
+}
+
+.empty-state p {
+    color: #777;
+    line-height: 1.6;
+}
+
+.department-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid #ececec;
+}
+
+.department-row:last-child {
+    border-bottom: none;
+}
+
+.department-row span:first-child {
+    color: #555;
+}
+
+.department-row span:last-child {
+    font-weight: 600;
+    color: #142344;
+}
