@@ -21,8 +21,9 @@ body{
 .rh-main{
     flex:1;
     margin-left:314px;
-    padding:42px 48px;
-    background:#f7f4ef;
+    padding:48px 56px;
+    background:#F7F5F2;
+    overflow-y:auto;
 }
 .memo-btn{
     width:250px;
