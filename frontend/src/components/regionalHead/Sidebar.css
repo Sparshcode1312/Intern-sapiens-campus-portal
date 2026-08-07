@@ -1,0 +1,103 @@
+.rh-sidebar{
+    width:315px;
+    height:100vh;
+    background:#111D3B;
+    color:#fff;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    left:0;
+}
+
+.sidebar-logo{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:28px 24px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.logo-circle{
+    width:56px;
+    height:56px;
+    border-radius:50%;
+    background:#fff;
+    color:#111D3B;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+    font-weight:700;
+}
+
+.sidebar-logo h2{
+    font-size:34px;
+    font-family:"Cormorant Garamond",serif;
+    font-weight:600;
+    margin:0;
+}
+
+.sidebar-logo span{
+    display:block;
+    margin-top:4px;
+    color:#C9953F;
+    font-size:13px;
+    letter-spacing:3px;
+}
+
+.sidebar-menu{
+    padding:22px 14px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    flex:1;
+}
+
+.sidebar-menu button{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    background:transparent;
+    border:none;
+    color:#D7DBE5;
+    font-size:19px;
+    padding:16px 18px;
+    border-radius:14px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.sidebar-menu button:hover{
+    background:#22335F;
+}
+
+.sidebar-menu button.active{
+    background:#22335F;
+    color:#fff;
+}
+
+.sidebar-footer{
+    padding:22px;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.sidebar-footer p{
+    color:#C9CEDB;
+    margin-bottom:18px;
+    font-size:15px;
+}
+
+.sidebar-footer button{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:transparent;
+    border:none;
+    color:#fff;
+    font-size:17px;
+    cursor:pointer;
+}
