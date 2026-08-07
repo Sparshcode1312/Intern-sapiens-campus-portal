@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard,
   FileText,
@@ -10,10 +11,26 @@ import {
 import "./Sidebar.css";
 
 const NAV_ITEMS = [
-  { label: "Overview", icon: LayoutDashboard, active: true },
-  { label: "Notesheets", icon: FileText },
-  { label: "New Memo", icon: FilePlus },
-  { label: "Approval Flow", icon: GitBranch },
+  {
+    label: "Overview",
+    icon: LayoutDashboard,
+    path: "/regional-head",
+  },
+  {
+    label: "Notesheets",
+    icon: FileText,
+    path: "/regional-head/notesheets",
+  },
+  {
+    label: "New Memo",
+    icon: FilePlus,
+    path: "/regional-head/new-memo",
+  },
+  {
+    label: "Approval Flow",
+    icon: GitBranch,
+    path: "/regional-head/approval-flow",
+  },
 ];
 
 const Sidebar = ({ userEmail = "testuser@gmail.com", onSignOut }) => {
@@ -30,15 +47,20 @@ const Sidebar = ({ userEmail = "testuser@gmail.com", onSignOut }) => {
         </div>
       </div>
 
-      <nav className="sidebar-menu">
-        {NAV_ITEMS.map(({ label, icon: Icon, active }) => (
-          <button key={label} className={active ? "active" : ""} type="button">
-            <Icon size={18} />
-            {label}
-          </button>
-        ))}
-      </nav>
-
+    <nav className="sidebar-menu">
+  {NAV_ITEMS.map(({ label, icon: Icon, path }) => (
+    <NavLink
+      key={label}
+      to={path}
+      className={({ isActive }) =>
+        isActive ? "sidebar-link active" : "sidebar-link"
+      }
+    >
+      <Icon size={18} />
+      <span>{label}</span>
+    </NavLink>
+  ))}
+</nav>
       <div className="sidebar-footer">
         <p>{userEmail}</p>
         <button type="button" onClick={onSignOut}>
