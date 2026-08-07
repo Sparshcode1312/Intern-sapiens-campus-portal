@@ -29,6 +29,12 @@ const seedUsers = async () => {
         centreName: 'North Region',
         designationLabel: 'Cluster Manager - North'
       }
+      {
+    name: "Regional Head",
+    email: "regional@sapiens.com",
+    password: "Regional@123",
+    role: "regional_head"
+},
     ];
 
     await User.insertMany(users);
