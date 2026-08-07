@@ -12,31 +12,34 @@ import {
 } from "lucide-react";
 
 const RegionalDashboard = () => {
-  return (
-    <div className="rh-page">
+ return (
+  <div className="rh-layout">
 
-      <Sidebar />
+    <Sidebar />
 
-      <main className="rh-content">
+    <main className="rh-main">
 
-        {/* Header */}
-        <div className="rh-header">
+      {/* HERO */}
 
-          <div>
+      <section className="hero-section">
 
-            <p className="rh-title-small">
-              REGIONAL HEAD · OVERVIEW
-            </p>
+        <div className="hero-left">
 
-            <h1 className="rh-title">
-              Good day, Regional Head
-            </h1>
+          <p className="hero-label">
+            REGIONAL HEAD · OVERVIEW
+          </p>
 
-            <p className="rh-subtitle">
-              Notesheets from across the institutes, awaiting your action.
-            </p>
+          <h1 className="hero-title">
+            Good day, Regional Head
+          </h1>
 
-          </div>
+          <p className="hero-subtitle">
+            Notesheets from across the institutes, awaiting your action.
+          </p>
+
+        </div>
+
+        <div className="hero-right">
 
           <button className="memo-btn">
             Generate new memo
@@ -44,83 +47,80 @@ const RegionalDashboard = () => {
 
         </div>
 
-        {/* Statistics */}
+      </section>
 
-        <div className="stats-grid">
+      {/* STATS */}
 
-          <StatCard
-            title="NOTESHEETS"
-            value="0"
-            icon={<FileText size={22} />}
-          />
+      <section className="stats-grid">
 
-          <StatCard
-            title="PENDING"
-            value="0"
-            icon={<Clock3 size={22} />}
-            highlight
-          />
+        <StatCard
+          title="NOTESHEETS"
+          value="0"
+          icon={<FileText size={20} />}
+        />
 
-          <StatCard
-            title="APPROVED / COMPLETED"
-            value="0"
-            icon={<CircleCheckBig size={22} />}
-          />
+        <StatCard
+          title="PENDING"
+          value="0"
+          icon={<Clock3 size={20} />}
+          highlight
+        />
 
-          <StatCard
-            title="MEMOS ISSUED"
-            value="2"
-            icon={<FilePlus2 size={22} />}
-          />
+        <StatCard
+          title="APPROVED / COMPLETED"
+          value="0"
+          icon={<CircleCheckBig size={20} />}
+        />
 
-        </div>
+        <StatCard
+          title="MEMOS ISSUED"
+          value="2"
+          icon={<FilePlus2 size={20} />}
+        />
 
-        {/* Bottom */}
+      </section>
 
-        <div className="dashboard-bottom">
+      {/* LOWER GRID */}
 
-          {/* Left */}
+      <section className="content-grid">
 
-          <div className="recent-card">
+        {/* LEFT */}
 
-            <div className="card-header">
+        <div className="recent-card">
 
-              <h3>
-                Recent notesheets
-              </h3>
+          <div className="card-header">
 
-              <button className="view-btn">
-                View all →
-              </button>
+            <h3>Recent notesheets</h3>
 
-            </div>
-
-            <div className="empty-box">
-
-              <div className="empty-icon">
-                📄
-              </div>
-
-              <h4>
-                No notesheets yet
-              </h4>
-
-              <p>
-                Notesheets received from department heads
-                will appear here.
-              </p>
-
-            </div>
+            <button className="view-btn">
+              View all →
+            </button>
 
           </div>
 
-          {/* Right */}
+          <div className="empty-box">
 
-          <div className="department-card">
+            <div className="empty-icon">
+              📄
+            </div>
 
-            <h3>
-              By department
-            </h3>
+            <h4>No notesheets yet</h4>
+
+            <p>
+              Once departments submit notesheets they'll appear here.
+            </p>
+
+          </div>
+
+        </div>
+
+        {/* RIGHT */}
+
+        <div className="department-card">
+
+          <h3>By department</h3>
+
+          <div className="dept-list">
 
             <div className="dept-row">
               <span>Marketing</span>
@@ -156,10 +156,10 @@ const RegionalDashboard = () => {
 
         </div>
 
-      </main>
+      </section>
 
-    </div>
-  );
-};
+    </main>
 
-export default RegionalDashboard;
+  </div>
+);
+};  
