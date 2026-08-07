@@ -8,6 +8,7 @@ import CentreHeadDashboard from './pages/dashboards/CentreHeadDashboard';
 import RegionalDashboard from "./pages/RegionalHead/RegionalDashboard";
 import ApproverDashboard from './pages/dashboards/ApproverDashboard';
 import NewRequirement from './pages/NewRequirement';
+import Notesheets from "./pages/RegionalHead/Notesheets";
 
 function App() {
   return (
@@ -86,6 +87,15 @@ function App() {
                 </ProtectedRoute>
               } 
             />
+
+            <Route
+  path="/regional-head/notesheets"
+  element={
+    <ProtectedRoute allowedRoles={["Regional Head"]}>
+      <Notesheets />
+    </ProtectedRoute>
+  }
+/>
           </Route>
           <Route
   path="/regional-head"
