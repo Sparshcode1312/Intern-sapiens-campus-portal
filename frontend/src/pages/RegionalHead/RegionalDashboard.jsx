@@ -165,4 +165,6 @@ const RegionalDashboard = () => {
 
   </div>
 );
-};  
+};
+
+export default RegionalDashboard;
