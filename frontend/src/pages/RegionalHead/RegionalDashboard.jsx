@@ -18,6 +18,7 @@ const RegionalDashboard = () => {
     <Sidebar />
 
     <main className="rh-main">
+      <div className="rh-container">
 
       {/* HERO */}
 
@@ -157,6 +158,8 @@ const RegionalDashboard = () => {
         </div>
 
       </section>
+
+      </div>
 
     </main>
 
