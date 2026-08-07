@@ -33,11 +33,12 @@ const RegionalDashboard = () => {
         icon={<FileText size={18} />}
     />
 
-    <StatCard
-        title="PENDING"
-        value={0}
-        icon={<Clock3 size={18} />}
-    />
+   <StatCard
+    title="PENDING"
+    value={0}
+    icon={<Clock3 size={18} />}
+    highlighted
+/>
 
     <StatCard
         title="APPROVED / COMPLETED"
