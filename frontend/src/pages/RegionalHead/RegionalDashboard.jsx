@@ -18,11 +18,11 @@ import { AuthContext } from "../../context/AuthContext";
 import api from "../../utils/api";
 import "./regional-head.css";
 
-const StatCard = ({ label, value, icon: Icon, iconClass = "", onClick, active }) => {
+const StatCard = ({ label, value, icon: Icon, iconClass = "", cardClass = "", onClick, active }) => {
   return (
     <button
       type="button"
-      className={`rh-stat-card${onClick ? " rh-stat-card-clickable" : ""}${active ? " rh-stat-card-active" : ""}`}
+      className={`rh-stat-card${cardClass ? ` ${cardClass}` : ""}${onClick ? " rh-stat-card-clickable" : ""}${active ? " rh-stat-card-active" : ""}`}
       onClick={onClick}
     >
       <div className="rh-stat-card-top">
@@ -176,15 +176,15 @@ const RegionalDashboard = () => {
               active={activeFilter === "all"}
             />
 
-            <StatCard
-              label="PENDING"
-              value={loading ? "…" : stats.pending}
-              icon={Clock3}
-              iconClass="rh-icon-pending"
-              onClick={() => handleStatClick("pending", "Pending")}
-              active={activeFilter === "pending"}
-            />
-
+           <StatCard
+  label="PENDING"
+  value={loading ? "…" : stats.pending}
+  icon={Clock3}
+  iconClass="rh-icon-pending"
+  cardClass="rh-stat-card-highlight"
+  onClick={() => handleStatClick("pending", "Pending")}
+  active={activeFilter === "pending"}
+/>
             <StatCard
               label="APPROVED / COMPLETED"
               value={loading ? "…" : stats.approved}
