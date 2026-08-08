@@ -1,126 +1,246 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../styles/regionalHead.css";
-
-import Sidebar from "../../components/regionalHead/Sidebar";
-import StatCard from "../../components/regionalHead/StatCard";
-import { AuthContext } from "../../context/AuthContext";
-
 import {
+  LayoutDashboard,
   FileText,
-  Clock3,
-  CircleCheckBig,
   FilePlus2,
+  GitBranch,
+  LogOut,
+  FileCheck2,
+  Clock3,
+  CheckCircle2,
+  FileOutput,
+  ChevronRight,
 } from "lucide-react";
+
+import { AuthContext } from "../../context/AuthContext";
+import "./regional-head.css";
+
+const StatCard = ({ label, value, icon: Icon, iconClass = "" }) => {
+  return (
+    <div className="rh-stat-card">
+      <div className="rh-stat-card-top">
+        <span>{label}</span>
+        <Icon size={22} className={iconClass} />
+      </div>
+
+      <div className="rh-stat-value">{value}</div>
+    </div>
+  );
+};
 
 const RegionalDashboard = () => {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleSignOut = () => {
+  const goTo = (path) => {
+    navigate(path);
+  };
+
+  const handleLogout = () => {
     logout();
     navigate("/login", { replace: true });
   };
 
   return (
     <div className="rh-layout">
-      <Sidebar userEmail={user?.email} onSignOut={handleSignOut} />
+      {/* ================= SIDEBAR ================= */}
+      <aside className="rh-sidebar">
+        {/* Brand */}
+        <div className="rh-brand">
+          <div className="rh-brand-logo">
+            <span>SG</span>
+          </div>
 
+          <div className="rh-brand-text">
+            <div className="rh-brand-title">Sapiens</div>
+            <div className="rh-brand-subtitle">REGIONAL HEAD</div>
+          </div>
+        </div>
+
+        {/* Navigation */}
+        <nav className="rh-sidebar-nav">
+          <button
+            type="button"
+            className="rh-nav-item rh-nav-item-active"
+            onClick={() => goTo("/regional-head")}
+          >
+            <LayoutDashboard size={20} />
+            <span>Overview</span>
+          </button>
+
+          <button
+            type="button"
+            className="rh-nav-item"
+            onClick={() => goTo("/regional-head/notesheets")}
+          >
+            <FileText size={20} />
+            <span>Notesheets</span>
+          </button>
+
+          <button
+            type="button"
+            className="rh-nav-item"
+            onClick={() => goTo("/regional-head/new-memo")}
+          >
+            <FilePlus2 size={20} />
+            <span>New Memo</span>
+          </button>
+
+          <button
+            type="button"
+            className="rh-nav-item"
+            onClick={() => goTo("/regional-head/approval-flow")}
+          >
+            <GitBranch size={20} />
+            <span>Approval Flow</span>
+          </button>
+        </nav>
+
+        {/* User section */}
+        <div className="rh-sidebar-bottom">
+          <div className="rh-user-email">
+            {user?.email || "regional@sapiens.edu"}
+          </div>
+
+          <button
+            type="button"
+            className="rh-signout-button"
+            onClick={handleLogout}
+          >
+            <LogOut size={19} />
+            <span>Sign out</span>
+          </button>
+        </div>
+      </aside>
+
+      {/* ================= MAIN CONTENT ================= */}
       <main className="rh-main">
-        <div className="rh-container">
-
-          {/* HERO */}
-          <section className="hero-section">
-            <div className="hero-left">
-              <p className="hero-label">
+        <div className="rh-content">
+          {/* Hero */}
+          <section className="rh-hero">
+            <div className="rh-hero-left">
+              <div className="rh-eyebrow">
                 REGIONAL HEAD · OVERVIEW
-              </p>
+              </div>
 
-              <h1 className="hero-title">
-                Good day, Regional Head
-              </h1>
+              <h1>Good day, Regional Head</h1>
 
-              <p className="hero-subtitle">
+              <p>
                 Notesheets from across the institutes, awaiting your action.
               </p>
             </div>
 
-            <div className="hero-right">
-              
-        <button
-  type="button"
-  className="memo-btn"
-  onClick={() => navigate("/regional-head/new-memo")}
->
-  <FilePlus2 size={17} />
-  Generate new memo
-</button>
+            <div className="rh-hero-right">
+              <button
+                type="button"
+                className="rh-primary-button"
+                onClick={() => goTo("/regional-head/new-memo")}
+              >
+                <FilePlus2 size={20} />
+                <span>Generate new memo</span>
+              </button>
             </div>
           </section>
 
-          {/* STATS */}
-          <section className="stats-grid">
+          {/* Stats */}
+          <section className="rh-stats-grid">
             <StatCard
-              title="NOTESHEETS"
+              label="NOTESHEETS"
               value="0"
-              icon={<FileText size={19} />}
+              icon={FileCheck2}
             />
 
             <StatCard
-              title="PENDING"
+              label="PENDING"
               value="0"
-              icon={<Clock3 size={19} />}
-              highlighted
+              icon={Clock3}
+              iconClass="rh-icon-pending"
             />
 
             <StatCard
-              title="APPROVED / COMPLETED"
+              label="APPROVED / COMPLETED"
               value="0"
-              icon={<CircleCheckBig size={19} />}
+              icon={CheckCircle2}
             />
 
             <StatCard
-              title="MEMOS ISSUED"
+              label="MEMOS ISSUED"
               value="2"
-              icon={<FilePlus2 size={19} />}
+              icon={FileOutput}
             />
           </section>
 
-          {/* LOWER GRID */}
-          <section className="content-grid">
-            <div className="recent-card">
-              <div className="card-header">
-                <h3>Recent notesheets</h3>
-                <button className="view-btn" type="button">
-                  View all →
+          {/* Bottom grid */}
+          <section className="rh-dashboard-grid">
+            {/* Recent notesheets */}
+            <div className="rh-panel">
+              <div className="rh-panel-header">
+                <h2>Recent notesheets</h2>
+
+                <button
+                  type="button"
+                  className="rh-view-all"
+                  onClick={() => goTo("/regional-head/notesheets")}
+                >
+                  View all
+                  <ChevronRight size={17} />
                 </button>
               </div>
 
-              <div className="empty-box">
-                <div className="empty-icon">
-                  <FileText size={28} strokeWidth={1.5} />
+              <div className="rh-empty-state">
+                <div className="rh-empty-icon">
+                  <FileText size={28} />
                 </div>
-                <h4>No notesheets yet</h4>
+
+                <h3>No notesheets yet</h3>
+
                 <p>
-                  Once departments submit notesheets they'll appear here.
+                  Once departments submit notesheets they'll
+                  appear here.
                 </p>
               </div>
             </div>
 
-            <div className="department-card">
-              <h3>By department</h3>
+            {/* Department */}
+            <div className="rh-panel">
+              <div className="rh-panel-header">
+                <h2>By department</h2>
+              </div>
 
-              <div className="dept-list">
-                <div className="dept-row"><span>Marketing</span><span>0</span></div>
-                <div className="dept-row"><span>HR</span><span>0</span></div>
-                <div className="dept-row"><span>Operations</span><span>0</span></div>
-                <div className="dept-row"><span>Academics</span><span>0</span></div>
-                <div className="dept-row"><span>Events</span><span>0</span></div>
-                <div className="dept-row"><span>Administration</span><span>0</span></div>
+              <div className="rh-department-list">
+                <div className="rh-department-row">
+                  <span>Marketing</span>
+                  <strong>0</strong>
+                </div>
+
+                <div className="rh-department-row">
+                  <span>HR</span>
+                  <strong>0</strong>
+                </div>
+
+                <div className="rh-department-row">
+                  <span>Operations</span>
+                  <strong>0</strong>
+                </div>
+
+                <div className="rh-department-row">
+                  <span>Academics</span>
+                  <strong>0</strong>
+                </div>
+
+                <div className="rh-department-row">
+                  <span>Events</span>
+                  <strong>0</strong>
+                </div>
+
+                <div className="rh-department-row">
+                  <span>Administration</span>
+                  <strong>0</strong>
+                </div>
               </div>
             </div>
           </section>
-
         </div>
       </main>
     </div>
