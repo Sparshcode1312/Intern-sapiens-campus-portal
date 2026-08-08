@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -13,6 +18,7 @@ import NewRequirement from "./pages/NewRequirement";
 import RegionalDashboard from "./pages/RegionalHead/RegionalDashboard";
 import Notesheets from "./pages/RegionalHead/Notesheets";
 import NewMemo from "./pages/RegionalHead/NewMemo";
+import RegionalLayout from "./pages/RegionalHead/RegionalLayout";
 
 function App() {
   return (
@@ -24,9 +30,12 @@ function App() {
           <Route path="/login" element={<Login />} />
 
           {/* Default */}
-          <Route path="/" element={<Navigate to="/login" replace />} />
+          <Route
+            path="/"
+            element={<Navigate to="/login" replace />}
+          />
 
-          {/* Dashboard */}
+          {/* Other dashboards */}
           <Route path="/dashboard" element={<DashboardLayout />}>
 
             {/* Centre Head */}
@@ -48,8 +57,6 @@ function App() {
               }
             />
 
-         
-              
             {/* Cluster Manager */}
             <Route
               path="cluster-manager"
@@ -112,31 +119,46 @@ function App() {
 
           </Route>
 
-          <Route
-    path="/regional-head"
-    element={
-        <ProtectedRoute allowedRoles={["Regional Head"]}>
-            <RegionalDashboard />
-        </ProtectedRoute>
-    }
-/>
 
-<Route
-    path="/regional-head/notesheets"
-    element={
-        <ProtectedRoute allowedRoles={["Regional Head"]}>
-            <Notesheets />
-        </ProtectedRoute>
-    }
-/>
+          {/* =============================== */}
+          {/* REGIONAL HEAD SECTION */}
+          {/* =============================== */}
+
           <Route
-  path="/regional-head/new-memo"
-  element={
-    <ProtectedRoute allowedRoles={["Regional Head"]}>
-      <NewMemo />
-    </ProtectedRoute>
-  }
-/>
+            path="/regional-head"
+            element={
+              <ProtectedRoute allowedRoles={["Regional Head"]}>
+                <RegionalLayout />
+              </ProtectedRoute>
+            }
+          >
+
+            {/* /regional-head */}
+            <Route
+              index
+              element={<RegionalDashboard />}
+            />
+
+            {/* /regional-head/notesheets */}
+            <Route
+              path="notesheets"
+              element={<Notesheets />}
+            />
+
+            {/* /regional-head/new-memo */}
+            <Route
+              path="new-memo"
+              element={<NewMemo />}
+            />
+
+          </Route>
+
+
+          {/* Fallback */}
+          <Route
+            path="*"
+            element={<Navigate to="/login" replace />}
+          />
 
         </Routes>
       </Router>
