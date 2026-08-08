@@ -12,6 +12,7 @@ import NewRequirement from "./pages/NewRequirement";
 
 import RegionalDashboard from "./pages/RegionalHead/RegionalDashboard";
 import Notesheets from "./pages/RegionalHead/Notesheets";
+import NewMemo from "./pages/RegionalHead/NewMemo";
 
 function App() {
   return (
