@@ -1,45 +1,40 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   FileText,
   FilePlus,
   GitBranch,
   LogOut,
+  GraduationCap,
 } from "lucide-react";
 
+import { AuthContext } from "../../context/AuthContext";
 import "./Sidebar.css";
 
 const NAV_ITEMS = [
-  {
-    label: "Overview",
-    icon: LayoutDashboard,
-    path: "/regional-head",
-  },
-  {
-    label: "Notesheets",
-    icon: FileText,
-    path: "/regional-head/notesheets",
-  },
-  {
-    label: "New Memo",
-    icon: FilePlus,
-    path: "/regional-head/new-memo",
-  },
-  {
-    label: "Approval Flow",
-    icon: GitBranch,
-    path: "/regional-head/approval-flow",
-  },
+  { label: "Overview", icon: LayoutDashboard, path: "/regional-head" },
+  { label: "Notesheets", icon: FileText, path: "/regional-head/notesheets" },
+  { label: "New Memo", icon: FilePlus, path: "/regional-head/new-memo" },
+  { label: "Approval Flow", icon: GitBranch, path: "/regional-head/approval-flow" },
 ];
 
-const Sidebar = ({
-  userEmail = "testuser@gmail.com",
-  onSignOut,
-}) => {
+const Sidebar = () => {
+  const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    logout();
+    navigate("/login", { replace: true });
+  };
+
   return (
-    <aside className="sidebar">
-      <div className="sidebar-brand">
+    <aside className="rh-sidebar">
+      <div className="sidebar-logo">
+        <div className="logo-circle">
+          <GraduationCap size={22} color="#d69a28" />
+        </div>
+
         <div>
           <h2>Sapiens</h2>
           <span>REGIONAL HEAD</span>
@@ -51,9 +46,8 @@ const Sidebar = ({
           <NavLink
             key={label}
             to={path}
-            className={({ isActive }) =>
-              `sidebar-nav-link ${isActive ? "active" : ""}`
-            }
+            end={path === "/regional-head"}
+            className={({ isActive }) => `sidebar-nav-link ${isActive ? "active" : ""}`}
           >
             <Icon size={18} />
             <span>{label}</span>
@@ -62,12 +56,9 @@ const Sidebar = ({
       </nav>
 
       <div className="sidebar-footer">
-        <p>{userEmail}</p>
+        <p>{user?.email || "regional@sapiens.edu"}</p>
 
-        <button
-          type="button"
-          onClick={onSignOut}
-        >
+        <button type="button" onClick={handleSignOut}>
           <LogOut size={16} />
           Sign out
         </button>
