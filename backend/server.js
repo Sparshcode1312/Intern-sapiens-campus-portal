@@ -33,6 +33,7 @@ app.use(
 app.use(express.json());
 
 app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/requirements', require('./routes/requirementRoutes'));
 
 app.get('/', (req, res) => {
   res.status(200).json({
