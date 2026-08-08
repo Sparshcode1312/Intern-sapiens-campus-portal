@@ -19,6 +19,7 @@ import RegionalDashboard from "./pages/RegionalHead/RegionalDashboard";
 import Notesheets from "./pages/RegionalHead/Notesheets";
 import NewMemo from "./pages/RegionalHead/NewMemo";
 import RegionalLayout from "./pages/RegionalHead/RegionalLayout";
+import ApprovalFlow from "./pages/RegionalHead/ApprovalFlow";
 import HQPortal from "./pages/hq/HQPortal";
 import DirectorConsole from "./pages/director/DirectorConsole";
 
@@ -151,6 +152,12 @@ function App() {
             <Route
               path="new-memo"
               element={<NewMemo />}
+            />
+
+            {/* /regional-head/approval-flow */}
+            <Route
+              path="approval-flow"
+              element={<ApprovalFlow />}
             />
 
           </Route>

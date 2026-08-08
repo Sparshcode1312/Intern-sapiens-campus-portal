@@ -1,558 +1,295 @@
 import React, { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Plus,
-  ChevronDown,
-  Trash2,
-  Circle,
-} from "lucide-react";
+import { Plus, ChevronDown, Trash2 } from "lucide-react";
+import "./regional-head.css";
 
-import Sidebar from "../../components/regionalHead/Sidebar";
-import "../../styles/regionalHead.css";
-import "../../styles/newMemo.css";
+/* =========================================================
+   APPROVAL STEP — small reusable component
+========================================================= */
+
+const ApprovalStep = ({ label, sub, active }) => (
+  <div className="nm-approval-step">
+    <div className={`nm-approval-dot${active ? " nm-approval-dot-active" : ""}`}>
+      {active && <span className="nm-approval-dot-inner" />}
+    </div>
+    <div className="nm-approval-step-text">
+      <strong>{label}</strong>
+      <span>{sub}</span>
+    </div>
+  </div>
+);
+
+const ApprovalLine = () => <div className="nm-approval-line" />;
+
+/* =========================================================
+   NEW MEMO PAGE
+========================================================= */
 
 const NewMemo = () => {
   const navigate = useNavigate();
 
-  const [title, setTitle] = useState("");
+  const [title, setTitle]           = useState("");
   const [department, setDepartment] = useState("Marketing");
-  const [campus, setCampus] = useState("SHS Dhawas");
-
+  const [campus, setCampus]         = useState("SHS Dhawas");
   const [requiresPurchase, setRequiresPurchase] = useState(false);
-  const [alreadyInStock, setAlreadyInStock] = useState(false);
-
-  const [notes, setNotes] = useState("");
+  const [alreadyInStock, setAlreadyInStock]     = useState(false);
+  const [notes, setNotes]           = useState("");
 
   const [items, setItems] = useState([
-    {
-      id: 1,
-      name: "",
-      qty: 1,
-      unitPrice: 0,
-    },
+    { id: 1, name: "", qty: 1, unitPrice: 0 },
   ]);
 
-  const total = useMemo(() => {
-    return items.reduce(
-      (sum, item) =>
-        sum + Number(item.qty || 0) * Number(item.unitPrice || 0),
-      0
-    );
-  }, [items]);
+  const total = useMemo(
+    () =>
+      items.reduce(
+        (sum, item) =>
+          sum + Number(item.qty || 0) * Number(item.unitPrice || 0),
+        0
+      ),
+    [items]
+  );
 
-  const addItem = () => {
+  const addItem = () =>
     setItems((prev) => [
       ...prev,
-      {
-        id: Date.now(),
-        name: "",
-        qty: 1,
-        unitPrice: 0,
-      },
+      { id: Date.now(), name: "", qty: 1, unitPrice: 0 },
     ]);
-  };
 
-  const updateItem = (id, field, value) => {
+  const updateItem = (id, field, value) =>
     setItems((prev) =>
       prev.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              [field]: value,
-            }
-          : item
+        item.id === id ? { ...item, [field]: value } : item
       )
     );
-  };
 
-  const removeItem = (id) => {
-    setItems((prev) => {
-      if (prev.length === 1) {
-        return prev;
-      }
+  const removeItem = (id) =>
+    setItems((prev) =>
+      prev.length === 1 ? prev : prev.filter((item) => item.id !== id)
+    );
 
-      return prev.filter((item) => item.id !== id);
+  const handleGenerate = () => {
+    console.log("Memo:", {
+      title, department, campus,
+      requiresPurchase, alreadyInStock,
+      items, notes, total,
     });
-  };
-
-  const handleGenerateMemo = () => {
-    console.log("Memo data:", {
-      title,
-      department,
-      campus,
-      requiresPurchase,
-      alreadyInStock,
-      items,
-      notes,
-      total,
-    });
-
-    // Backend/API integration can be added here later.
+    /* TODO: POST to API */
   };
 
   return (
-    <div className="rh-page">
-      <Sidebar />
+    <div className="nm-page">
 
-      <main className="new-memo-main">
-        <div className="new-memo-container">
+      {/* ── Header ── */}
+      <div className="nm-header">
+        <div className="nm-eyebrow">NEW MEMO</div>
+        <h1>Generate a memo</h1>
+        <p>Capture the requirement and route it through the approval flow.</p>
+      </div>
 
-          {/* ================= HEADER ================= */}
 
-          <section className="new-memo-header">
+      {/* ── Body: left content + right panel ── */}
+      <div className="nm-body">
 
-            <div>
-              <p className="new-memo-label">
-                NEW MEMO
-              </p>
+        {/* ── LEFT COLUMN ── */}
+        <div className="nm-left">
 
-              <h1 className="new-memo-title">
-                Generate a memo
-              </h1>
+          {/* Details card */}
+          <div className="nm-card">
+            <h2 className="nm-card-title">Details</h2>
 
-              <p className="new-memo-subtitle">
-                Capture the requirement and route it through the approval flow.
-              </p>
+            {/* Title */}
+            <div className="nm-field">
+              <label>Title</label>
+              <input
+                type="text"
+                placeholder="e.g. Procurement of projectors for Academics block"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
             </div>
 
-          </section>
-
-
-          {/* ================= MAIN GRID ================= */}
-
-          <div className="new-memo-grid">
-
-            {/* ================= LEFT COLUMN ================= */}
-
-            <div className="new-memo-left">
-
-
-              {/* ================= DETAILS ================= */}
-
-              <section className="memo-card details-card">
-
-                <h2 className="memo-card-title">
-                  Details
-                </h2>
-
-
-                {/* TITLE */}
-
-                <div className="form-group full-width">
-
-                  <label>
-                    Title
-                  </label>
-
-                  <input
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    placeholder="e.g. Procurement of projectors for Academics block"
-                  />
-
-                </div>
-
-
-                {/* DEPARTMENT + CAMPUS */}
-
-                <div className="form-row">
-
-                  <div className="form-group">
-
-                    <label>
-                      Department
-                    </label>
-
-                    <div className="select-wrapper">
-
-                      <select
-                        value={department}
-                        onChange={(e) =>
-                          setDepartment(e.target.value)
-                        }
-                      >
-                        <option>Marketing</option>
-                        <option>HR</option>
-                        <option>Operations</option>
-                        <option>Academics</option>
-                        <option>Events</option>
-                        <option>Administration</option>
-                      </select>
-
-                      <ChevronDown size={18} />
-
-                    </div>
-
-                  </div>
-
-
-                  <div className="form-group">
-
-                    <label>
-                      Campus
-                    </label>
-
-                    <div className="select-wrapper">
-
-                      <select
-                        value={campus}
-                        onChange={(e) =>
-                          setCampus(e.target.value)
-                        }
-                      >
-                        <option>SHS Dhawas</option>
-                        <option>Sapiens Main Campus</option>
-                        <option>North Campus</option>
-                        <option>South Campus</option>
-                      </select>
-
-                      <ChevronDown size={18} />
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-
-                {/* ROUTING */}
-
-                <div className="routing-section">
-
-                  <label className="routing-label">
-                    Routing
-                  </label>
-
-
-                  <button
-                    type="button"
-                    className="toggle-row"
-                    onClick={() =>
-                      setRequiresPurchase(!requiresPurchase)
-                    }
+            {/* Department + Campus */}
+            <div className="nm-row">
+              <div className="nm-field">
+                <label>Department</label>
+                <div className="nm-select-wrap">
+                  <select
+                    value={department}
+                    onChange={(e) => setDepartment(e.target.value)}
                   >
+                    <option>Marketing</option>
+                    <option>HR</option>
+                    <option>Operations</option>
+                    <option>Academics</option>
+                    <option>Events</option>
+                    <option>Administration</option>
+                  </select>
+                  <ChevronDown size={15} />
+                </div>
+              </div>
 
-                    <span>
-                      Requires purchase
-                    </span>
-
-                    <span
-                      className={`toggle ${
-                        requiresPurchase ? "on" : ""
-                      }`}
-                    >
-                      <span className="toggle-knob" />
-                    </span>
-
-                  </button>
-
-
-                  <button
-                    type="button"
-                    className="toggle-row"
-                    onClick={() =>
-                      setAlreadyInStock(!alreadyInStock)
-                    }
+              <div className="nm-field">
+                <label>Campus</label>
+                <div className="nm-select-wrap">
+                  <select
+                    value={campus}
+                    onChange={(e) => setCampus(e.target.value)}
                   >
-
-                    <span>
-                      Already in stock
-                    </span>
-
-                    <span
-                      className={`toggle ${
-                        alreadyInStock ? "on" : ""
-                      }`}
-                    >
-                      <span className="toggle-knob" />
-                    </span>
-
-                  </button>
-
+                    <option>SHS Dhawas</option>
+                    <option>Sapiens Main Campus</option>
+                    <option>North Campus</option>
+                    <option>South Campus</option>
+                  </select>
+                  <ChevronDown size={15} />
                 </div>
+              </div>
+            </div>
 
-              </section>
+            {/* Routing */}
+            <div className="nm-routing-label">Routing</div>
 
+            <div
+              className="nm-toggle-row"
+              onClick={() => setRequiresPurchase((v) => !v)}
+            >
+              <span>Requires purchase</span>
+              <div className={`rh-toggle${requiresPurchase ? " on" : ""}`}>
+                <div className="rh-toggle-knob" />
+              </div>
+            </div>
 
-              {/* ================= ITEMS ================= */}
-
-              <section className="memo-card items-card">
-
-                <div className="memo-section-header">
-
-                  <h2 className="memo-card-title">
-                    Items
-                  </h2>
-
-                  <button
-                    type="button"
-                    className="add-item-btn"
-                    onClick={addItem}
-                  >
-                    <Plus size={18} />
-                    Add item
-                  </button>
-
-                </div>
-
-
-                <div className="items-table-header">
-
-                  <span>
-                    Item name
-                  </span>
-
-                  <span>
-                    Qty
-                  </span>
-
-                  <span>
-                    Est. unit ₹
-                  </span>
-
-                  <span />
-
-                </div>
+            <div
+              className="nm-toggle-row"
+              onClick={() => setAlreadyInStock((v) => !v)}
+            >
+              <span>Already in stock</span>
+              <div className={`rh-toggle${alreadyInStock ? " on" : ""}`}>
+                <div className="rh-toggle-knob" />
+              </div>
+            </div>
+          </div>
 
 
-                <div className="items-list">
+          {/* Items card */}
+          <div className="nm-card">
+            <div className="nm-card-header">
+              <h2 className="nm-card-title">Items</h2>
+              <button type="button" className="nm-add-item-btn" onClick={addItem}>
+                <Plus size={15} />
+                Add item
+              </button>
+            </div>
 
-                  {items.map((item) => (
+            {/* Column headers */}
+            <div className="nm-items-head">
+              <span className="nm-col-name">Item name</span>
+              <span className="nm-col-qty">Qty</span>
+              <span className="nm-col-price">Est. unit ₹</span>
+              <span className="nm-col-del" />
+            </div>
 
-                    <div
-                      className="item-row"
-                      key={item.id}
-                    >
-
-                      <input
-                        type="text"
-                        placeholder="Item description"
-                        value={item.name}
-                        onChange={(e) =>
-                          updateItem(
-                            item.id,
-                            "name",
-                            e.target.value
-                          )
-                        }
-                      />
-
-
-                      <input
-                        type="number"
-                        min="1"
-                        value={item.qty}
-                        onChange={(e) =>
-                          updateItem(
-                            item.id,
-                            "qty",
-                            Number(e.target.value)
-                          )
-                        }
-                      />
-
-
-                      <input
-                        type="number"
-                        min="0"
-                        value={item.unitPrice}
-                        onChange={(e) =>
-                          updateItem(
-                            item.id,
-                            "unitPrice",
-                            Number(e.target.value)
-                          )
-                        }
-                      />
-
-
-                      <button
-                        type="button"
-                        className="delete-item-btn"
-                        onClick={() =>
-                          removeItem(item.id)
-                        }
-                        aria-label="Delete item"
-                      >
-                        <Trash2 size={18} />
-                      </button>
-
-                    </div>
-
-                  ))}
-
-                </div>
-
-
-                <div className="estimated-total">
-
-                  <span>
-                    Estimated total
-                  </span>
-
-                  <strong>
-                    ₹ {total.toLocaleString("en-IN")}
-                  </strong>
-
-                </div>
-
-              </section>
-
-
-              {/* ================= NOTES ================= */}
-
-              <section className="memo-card notes-card">
-
-                <h2 className="memo-card-title">
-                  Notes
-                </h2>
-
-                <textarea
-                  value={notes}
+            {/* Item rows */}
+            {items.map((item) => (
+              <div key={item.id} className="nm-item-row">
+                <input
+                  className="nm-col-name"
+                  type="text"
+                  placeholder="Item description"
+                  value={item.name}
                   onChange={(e) =>
-                    setNotes(e.target.value)
+                    updateItem(item.id, "name", e.target.value)
                   }
-                  placeholder="Any special case, justification or attachment reference..."
                 />
-
-              </section>
-
-
-              {/* ================= ACTIONS ================= */}
-
-              <div className="memo-actions">
-
-                <button
-                  type="button"
-                  className="cancel-btn"
-                  onClick={() =>
-                    navigate("/regional-head")
+                <input
+                  className="nm-col-qty"
+                  type="number"
+                  min="1"
+                  value={item.qty}
+                  onChange={(e) =>
+                    updateItem(item.id, "qty", Number(e.target.value))
                   }
-                >
-                  Cancel
-                </button>
-
+                />
+                <input
+                  className="nm-col-price"
+                  type="number"
+                  min="0"
+                  value={item.unitPrice}
+                  onChange={(e) =>
+                    updateItem(item.id, "unitPrice", Number(e.target.value))
+                  }
+                />
                 <button
                   type="button"
-                  className="generate-memo-btn"
-                  onClick={handleGenerateMemo}
+                  className="nm-col-del nm-del-btn"
+                  onClick={() => removeItem(item.id)}
                 >
-                  Generate memo
+                  <Trash2 size={16} />
                 </button>
-
               </div>
+            ))}
 
+            {/* Estimated total */}
+            <div className="nm-total-row">
+              <span>Estimated total</span>
+              <strong>₹ {total.toLocaleString("en-IN")}</strong>
             </div>
+          </div>
 
 
-            {/* ================= RIGHT COLUMN ================= */}
-
-            <aside className="approval-card">
-
-              <h2>
-                Approval flow
-              </h2>
-
-              <p className="approval-subtitle">
-                Standard pipeline
-              </p>
-
-
-              <div className="approval-list">
-
-                <div className="approval-step active">
-
-                  <div className="approval-icon active-icon">
-                    <Circle size={7} fill="currentColor" />
-                  </div>
-
-                  <div>
-                    <strong>
-                      Regional Head
-                    </strong>
-
-                    <span>
-                      Pending action
-                    </span>
-                  </div>
-
-                </div>
+          {/* Notes card */}
+          <div className="nm-card">
+            <h2 className="nm-card-title">Notes</h2>
+            <textarea
+              className="nm-notes-area"
+              placeholder="Any special case, justification or attachment reference..."
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+            />
+          </div>
 
 
-                <div className="approval-line" />
+          {/* Footer actions */}
+          <div className="nm-actions">
+            <button
+              type="button"
+              className="nm-cancel-btn"
+              onClick={() => navigate("/regional-head")}
+            >
+              Cancel
+            </button>
 
-
-                <div className="approval-step">
-
-                  <div className="approval-icon">
-                    <Circle size={7} />
-                  </div>
-
-                  <div>
-                    <strong>
-                      Director
-                    </strong>
-
-                    <span>
-                      Awaiting
-                    </span>
-                  </div>
-
-                </div>
-
-
-                <div className="approval-line" />
-
-
-                <div className="approval-step">
-
-                  <div className="approval-icon">
-                    <Circle size={7} />
-                  </div>
-
-                  <div>
-                    <strong>
-                      Chairperson
-                    </strong>
-
-                    <span>
-                      Awaiting
-                    </span>
-                  </div>
-
-                </div>
-
-
-                <div className="approval-line" />
-
-
-                <div className="approval-step">
-
-                  <div className="approval-icon">
-                    <Circle size={7} />
-                  </div>
-
-                  <div>
-                    <strong>
-                      Accounts
-                    </strong>
-
-                    <span>
-                      Awaiting
-                    </span>
-                  </div>
-
-                </div>
-
-              </div>
-
-            </aside>
-
+            <button
+              type="button"
+              className="nm-generate-btn"
+              onClick={handleGenerate}
+            >
+              Generate memo
+            </button>
           </div>
 
         </div>
-      </main>
+
+
+        {/* ── RIGHT COLUMN — Approval flow ── */}
+        <aside className="nm-right">
+          <div className="nm-card nm-approval-card">
+            <h2 className="nm-card-title">Approval flow</h2>
+            <p className="nm-approval-subtitle">Standard pipeline</p>
+
+            <div className="nm-approval-list">
+              <ApprovalStep label="Regional Head" sub="Pending action" active />
+              <ApprovalLine />
+              <ApprovalStep label="Director"      sub="Awaiting" />
+              <ApprovalLine />
+              <ApprovalStep label="Chairperson"   sub="Awaiting" />
+              <ApprovalLine />
+              <ApprovalStep label="Accounts"      sub="Awaiting" />
+            </div>
+          </div>
+        </aside>
+
+      </div>
+
     </div>
   );
 };

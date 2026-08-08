@@ -1,107 +1,110 @@
-import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import React, { useContext } from "react";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import {
+  LayoutDashboard,
+  FileText,
+  FilePlus2,
+  GitBranch,
+  LogOut,
+  GraduationCap,
+} from "lucide-react";
+
+import { AuthContext } from "../../context/AuthContext";
+import "./regional-head.css";
+
+const NAV_ITEMS = [
+  {
+    label: "Overview",
+    path: "/regional-head",
+    icon: LayoutDashboard,
+    end: true,
+  },
+  {
+    label: "Notesheets",
+    path: "/regional-head/notesheets",
+    icon: FileText,
+    end: false,
+  },
+  {
+    label: "New Memo",
+    path: "/regional-head/new-memo",
+    icon: FilePlus2,
+    end: false,
+  },
+  {
+    label: "Approval Flow",
+    path: "/regional-head/approval-flow",
+    icon: GitBranch,
+    end: false,
+  },
+];
 
 const RegionalLayout = () => {
+  const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login", { replace: true });
+  };
+
   return (
-    <div className="regional-layout">
+    <div className="rh-layout">
 
       {/* ================= SIDEBAR ================= */}
-      <aside className="regional-sidebar">
+      <aside className="rh-sidebar">
 
-        {/* Logo / Brand */}
-        <div className="regional-brand">
-
-          <div className="regional-logo">
-            🎓
+        {/* Brand */}
+        <div className="rh-sidebar-brand">
+          <div className="rh-brand-logo">
+            <GraduationCap size={24} />
           </div>
-
-          <div>
-            <div className="regional-brand-name">
-              Sapiens
-            </div>
-
-            <div className="regional-brand-role">
-              REGIONAL HEAD
-            </div>
+          <div className="rh-brand-text">
+            <div className="rh-brand-name">Sapiens</div>
+            <div className="rh-brand-role">REGIONAL HEAD</div>
           </div>
-
         </div>
 
 
         {/* Navigation */}
-        <nav className="regional-nav">
-
-          {/* Overview */}
-          <NavLink
-            to="/regional-head"
-            end
-            className={({ isActive }) =>
-              `regional-nav-item ${isActive ? "active" : ""}`
-            }
-          >
-            <span>▦</span>
-            <span>Overview</span>
-          </NavLink>
-
-
-          {/* Notesheets */}
-          <NavLink
-            to="/regional-head/notesheets"
-            className={({ isActive }) =>
-              `regional-nav-item ${isActive ? "active" : ""}`
-            }
-          >
-            <span>▤</span>
-            <span>Notesheets</span>
-          </NavLink>
-
-
-          {/* New Memo */}
-          <NavLink
-            to="/regional-head/new-memo"
-            className={({ isActive }) =>
-              `regional-nav-item ${isActive ? "active" : ""}`
-            }
-          >
-            <span>⊞</span>
-            <span>New Memo</span>
-          </NavLink>
-
-
-          {/* Approval Flow */}
-          <NavLink
-            to="/regional-head/approval-flow"
-            className={({ isActive }) =>
-              `regional-nav-item ${isActive ? "active" : ""}`
-            }
-          >
-            <span>⌘</span>
-            <span>Approval Flow</span>
-          </NavLink>
-
+        <nav className="rh-sidebar-nav">
+          {NAV_ITEMS.map(({ label, path, icon: Icon, end }) => (
+            <NavLink
+              key={path}
+              to={path}
+              end={end}
+              className={({ isActive }) =>
+                `rh-nav-item${isActive ? " rh-nav-item-active" : ""}`
+              }
+            >
+              <Icon size={19} />
+              <span>{label}</span>
+            </NavLink>
+          ))}
         </nav>
 
 
-        {/* Bottom section */}
-        <div className="regional-sidebar-bottom">
-
-          <div className="regional-email">
-            regional@sapiens.edu
+        {/* Bottom */}
+        <div className="rh-sidebar-bottom">
+          <div className="rh-user-email">
+            {user?.email || "regional@sapiens.edu"}
           </div>
 
-          <button className="regional-signout">
-            <span>↪</span>
+          <button
+            type="button"
+            className="rh-signout-button"
+            onClick={handleLogout}
+          >
+            <LogOut size={18} />
             <span>Sign out</span>
           </button>
-
         </div>
 
       </aside>
 
 
-      {/* ================= RIGHT CONTENT ================= */}
-
-      <main className="regional-main">
+      {/* ================= MAIN CONTENT ================= */}
+      <main className="rh-main">
         <Outlet />
       </main>
 
