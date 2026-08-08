@@ -261,6 +261,26 @@
   border-radius: 20px;
   padding: 27px 28px;
   box-shadow: 0 8px 22px rgba(25, 40, 65, 0.06);
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  cursor: default;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.rh-stat-card-clickable {
+  cursor: pointer;
+}
+
+.rh-stat-card-clickable:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(25, 40, 65, 0.12);
+  border-color: #d6dce6;
+}
+
+.rh-stat-card-active {
+  border-color: #173b6c;
+  box-shadow: 0 0 0 2px rgba(23, 59, 108, 0.15);
 }
 
 .rh-stat-card-top {
@@ -388,19 +408,118 @@
 }
 
 .rh-department-row {
+  width: 100%;
   min-height: 54px;
+  border: 0;
   border-bottom: 1px solid #ebe8e2;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: #143d70;
   font-size: 16px;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 0 10px;
+  transition: background 0.15s ease;
+}
+
+.rh-department-row:hover {
+  background: #f6f4ef;
 }
 
 .rh-department-row:last-child {
   border-bottom: 0;
 }
 
+.rh-department-row strong {
+  color: #657892;
+  font-weight: 500;
+}
+
+/* Recent notesheets list (replaces empty state when data exists) */
+
+.rh-recent-list {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.rh-recent-row {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #ebe8e2;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 8px;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+
+.rh-recent-row:hover {
+  background: #f6f4ef;
+}
+
+.rh-recent-row:last-child {
+  border-bottom: 0;
+}
+
+.rh-recent-row-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.rh-recent-title {
+  color: #143b6d;
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rh-recent-meta {
+  color: #7c8ba1;
+  font-size: 13px;
+}
+
+.rh-status-pill {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.rh-status-pending {
+  background: #fdf1dc;
+  color: #b3760f;
+}
+
+.rh-status-approved {
+  background: #e3f3e9;
+  color: #1f8a4c;
+}
+
+.rh-status-rejected {
+  background: #fbe6e6;
+  color: #c23f3f;
+}
+
+.rh-error-note {
+  margin-top: 12px;
+  color: #b3760f;
+  font-size: 14px;
+}
 .rh-department-row strong {
   color: #657892;
   font-weight: 500;
