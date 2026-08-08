@@ -1,0 +1,495 @@
+/* =========================================================
+   REGIONAL HEAD DASHBOARD
+   Isolated styles - does not modify dashboard.css
+   ========================================================= */
+
+.rh-layout {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  background: #f7f5f1;
+  color: #102f59;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.rh-sidebar {
+  width: 315px;
+  min-width: 315px;
+  min-height: 100vh;
+  background: #0d1b3d;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+}
+
+/* Brand */
+
+.rh-brand {
+  height: 123px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.rh-brand-logo {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: #07132e;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rh-brand-logo span {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #d69a28;
+}
+
+.rh-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.rh-brand-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.rh-brand-subtitle {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #d69a28;
+}
+
+/* Navigation */
+
+.rh-sidebar-nav {
+  padding: 28px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rh-nav-item {
+  width: 100%;
+  height: 56px;
+  border: 0;
+  border-radius: 13px;
+  background: transparent;
+  color: #7f91b0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 22px;
+  font-size: 17px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.rh-nav-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+}
+
+.rh-nav-item-active {
+  background: #192e58;
+  color: #ffffff;
+}
+
+.rh-nav-item svg {
+  flex-shrink: 0;
+}
+
+/* User */
+
+.rh-sidebar-bottom {
+  margin-top: auto;
+  padding: 22px 28px 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.rh-user-email {
+  color: #aab7ca;
+  font-size: 14px;
+  margin-bottom: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rh-signout-button {
+  border: 0;
+  background: transparent;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 16px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.rh-signout-button:hover {
+  color: #d69a28;
+}
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.rh-main {
+  margin-left: 315px;
+  width: calc(100% - 315px);
+  min-height: 100vh;
+}
+
+.rh-content {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 65px 70px 80px;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.rh-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  margin-bottom: 55px;
+}
+
+.rh-hero-left {
+  max-width: 850px;
+}
+
+.rh-eyebrow {
+  color: #d39427;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  margin-bottom: 22px;
+}
+
+.rh-hero h1 {
+  margin: 0;
+  color: #103666;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(44px, 4vw, 64px);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.rh-hero p {
+  margin: 22px 0 0;
+  color: #60718c;
+  font-size: 19px;
+  line-height: 1.6;
+}
+
+.rh-hero-right {
+  flex-shrink: 0;
+  padding-top: 5px;
+}
+
+.rh-primary-button {
+  height: 61px;
+  padding: 0 28px;
+  border: 0;
+  border-radius: 15px;
+  background: #173b6c;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(18, 48, 91, 0.18);
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.rh-primary-button:hover {
+  background: #0f315f;
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   STATS
+   ========================================================= */
+
+.rh-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+  margin-bottom: 35px;
+}
+
+.rh-stat-card {
+  min-height: 150px;
+  background: #ffffff;
+  border: 1px solid #e8e4dd;
+  border-radius: 20px;
+  padding: 27px 28px;
+  box-shadow: 0 8px 22px rgba(25, 40, 65, 0.06);
+}
+
+.rh-stat-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.rh-stat-card-top span {
+  color: #7c8ba1;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  line-height: 1.2;
+}
+
+.rh-stat-card-top svg {
+  color: #8b98aa;
+  flex-shrink: 0;
+}
+
+.rh-stat-card-top .rh-icon-pending {
+  color: #e49b13;
+}
+
+.rh-stat-value {
+  margin-top: 22px;
+  color: #103b70;
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 500;
+}
+
+/* =========================================================
+   LOWER DASHBOARD
+   ========================================================= */
+
+.rh-dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(350px, 0.75fr);
+  gap: 28px;
+}
+
+.rh-panel {
+  background: #ffffff;
+  border: 1px solid #e8e4dd;
+  border-radius: 20px;
+  min-height: 350px;
+  padding: 30px 32px;
+  box-shadow: 0 8px 22px rgba(25, 40, 65, 0.05);
+}
+
+.rh-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.rh-panel-header h2 {
+  margin: 0;
+  color: #103b70;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 27px;
+  font-weight: 400;
+}
+
+.rh-view-all {
+  border: 0;
+  background: transparent;
+  color: #536b8d;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.rh-view-all:hover {
+  color: #173b6c;
+}
+
+/* Empty */
+
+.rh-empty-state {
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.rh-empty-icon {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: #f1f4f8;
+  color: #8997aa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.rh-empty-state h3 {
+  margin: 0;
+  color: #143b6d;
+  font-size: 21px;
+}
+
+.rh-empty-state p {
+  max-width: 420px;
+  margin: 10px 0 0;
+  color: #71819a;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* Department */
+
+.rh-department-list {
+  margin-top: 22px;
+}
+
+.rh-department-row {
+  min-height: 54px;
+  border-bottom: 1px solid #ebe8e2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #143d70;
+  font-size: 16px;
+}
+
+.rh-department-row:last-child {
+  border-bottom: 0;
+}
+
+.rh-department-row strong {
+  color: #657892;
+  font-weight: 500;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .rh-sidebar {
+    width: 270px;
+    min-width: 270px;
+  }
+
+  .rh-main {
+    margin-left: 270px;
+    width: calc(100% - 270px);
+  }
+
+  .rh-content {
+    padding: 50px 35px 60px;
+  }
+
+  .rh-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .rh-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .rh-layout {
+    display: block;
+  }
+
+  .rh-sidebar {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    min-height: auto;
+  }
+
+  .rh-main {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .rh-brand {
+    height: 95px;
+  }
+
+  .rh-sidebar-nav {
+    padding: 15px;
+  }
+
+  .rh-sidebar-bottom {
+    margin-top: 10px;
+  }
+
+  .rh-hero {
+    flex-direction: column;
+  }
+
+  .rh-hero-right {
+    width: 100%;
+  }
+
+  .rh-primary-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 550px) {
+  .rh-content {
+    padding: 35px 18px 50px;
+  }
+
+  .rh-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rh-hero h1 {
+    font-size: 42px;
+  }
+
+  .rh-panel {
+    padding: 24px 20px;
+  }
+}
