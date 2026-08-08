@@ -66,6 +66,7 @@ const seedUsers = async () => {
       role: 'Centre Head',
       centreName: 'SGS Bharatpur',
       designationLabel: 'Centre Head - SGS Bharatpur',
+      customPassword: 'password123',
     },
     {
       name: 'Jane Cluster',
@@ -73,6 +74,7 @@ const seedUsers = async () => {
       role: 'Cluster Manager',
       centreName: 'North Region',
       designationLabel: 'Cluster Manager - North',
+      customPassword: 'password123',
     },
     {
       name: 'Michael Director',
@@ -80,30 +82,45 @@ const seedUsers = async () => {
       role: 'Director',
       centreName: 'HQ',
       designationLabel: 'Director',
+      customPassword: 'password123',
     },
     {
-  name: 'Regional Head',
-  email: 'regional@sapiens.edu',
-  role: 'Regional Head',
-  centreName: 'North Region',
-  designationLabel: 'Regional Head - North',
-},
+      name: 'Regional Head',
+      email: 'regional@sapiens.edu',
+      role: 'Regional Head',
+      centreName: 'North Region',
+      designationLabel: 'Regional Head - North',
+      customPassword: 'password123',
+    },
     {
-  name: 'HQ Admin',
-  email: 'hq@sapiens.edu',
-  role: 'HQ',
-  centreName: 'HQ',
-  designationLabel: 'HQ Administrator',
-},
+      name: 'HQ Admin',
+      email: 'hq@sapiens.edu',
+      role: 'HQ',
+      centreName: 'HQ',
+      designationLabel: 'HQ Administrator',
+      customPassword: 'hq@admin123',
+    },
+    {
+      name: 'Director Console Admin',
+      email: 'console@sapiens.edu',
+      role: 'DirectorConsole',
+      centreName: 'HQ',
+      designationLabel: 'Director Console Admin',
+      customPassword: 'console@admin123',
+    },
   ];
 
   for (const user of users) {
+    const pwdToHash = user.customPassword || demoPassword;
+    const pwdHash = await bcrypt.hash(pwdToHash, 10);
+    const { customPassword, ...userData } = user;
+
     await User.updateOne(
       { email: user.email },
       {
         $set: {
-          ...user,
-          password: hashedPassword,
+          ...userData,
+          password: pwdHash,
         },
       },
       { upsert: true }
