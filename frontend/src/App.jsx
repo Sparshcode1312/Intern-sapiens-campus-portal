@@ -19,6 +19,8 @@ import RegionalDashboard from "./pages/RegionalHead/RegionalDashboard";
 import Notesheets from "./pages/RegionalHead/Notesheets";
 import NewMemo from "./pages/RegionalHead/NewMemo";
 import RegionalLayout from "./pages/RegionalHead/RegionalLayout";
+import HQPortal from "./pages/hq/HQPortal";
+import DirectorConsole from "./pages/director/DirectorConsole";
 
 function App() {
   return (
@@ -158,6 +160,26 @@ function App() {
           <Route
             path="*"
             element={<Navigate to="/login" replace />}
+          />
+
+          {/* HQ Portal */}
+          <Route
+            path="/hq"
+            element={
+              <ProtectedRoute allowedRoles={["HQ"]}>
+                <HQPortal />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Director Console */}
+          <Route
+            path="/director-console"
+            element={
+              <ProtectedRoute allowedRoles={["DirectorConsole"]}>
+                <DirectorConsole />
+              </ProtectedRoute>
+            }
           />
 
         </Routes>

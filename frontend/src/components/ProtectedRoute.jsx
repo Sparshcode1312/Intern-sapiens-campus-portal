@@ -11,6 +11,8 @@ const roleToPath = {
   Chairperson: '/dashboard/chairperson',
   'Purchase Manager': '/dashboard/purchase-manager',
   Accounts: '/dashboard/accounts',
+  HQ: '/hq',
+  DirectorConsole: '/director-console',
 };
 
 const ProtectedRoute = ({ allowedRoles, children }) => {
