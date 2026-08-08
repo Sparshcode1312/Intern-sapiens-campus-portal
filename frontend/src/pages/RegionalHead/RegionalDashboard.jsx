@@ -47,10 +47,10 @@ const RegionalDashboard = () => {
 
             <div className="hero-right">
               
-           <button
+        <button
   type="button"
   className="memo-btn"
-  onClick={() => navigate("/dashboard/regional-head/new-memo")}
+  onClick={() => navigate("/regional-head/new-memo")}
 >
   <FilePlus2 size={17} />
   Generate new memo
