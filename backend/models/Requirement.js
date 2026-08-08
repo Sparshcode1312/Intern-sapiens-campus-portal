@@ -6,6 +6,13 @@ const requirementSchema = new mongoose.Schema({
   type: { type: String, enum: ['Purchase Required', 'Material Already in Stock'], required: true },
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   centreName: { type: String, required: true },
+
+   department: {
+    type: String,
+    enum: ['Marketing', 'HR', 'Operations', 'Academics', 'Events', 'Administration'],
+    required: true,
+  },
+  
   status: { 
     type: String, 
     enum: ['Pending', 'Approved', 'Rejected'],
