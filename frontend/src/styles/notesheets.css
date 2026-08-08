@@ -139,3 +139,55 @@ body{
     color:#6E7786;
     font-size:19px;
 }
+.notes-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.notes-list-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 6px;
+  border-bottom: 1px solid #ebe8e2;
+}
+
+.notes-list-row:last-child {
+  border-bottom: 0;
+}
+
+.notes-list-title {
+  color: #16274d;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.notes-list-meta {
+  margin-top: 4px;
+  color: #7c8ba1;
+  font-size: 14px;
+}
+
+.notes-status-pill {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.notes-status-pending {
+  background: #fdf1dc;
+  color: #b3760f;
+}
+
+.notes-status-approved {
+  background: #e3f3e9;
+  color: #1f8a4c;
+}
+
+.notes-status-rejected {
+  background: #fbe6e6;
+  color: #c23f3f;
+}
