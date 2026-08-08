@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import sapiensLogo from "../../assets/sapiens-logo-reference.png";
 import {
   LayoutDashboard,
   FileText,
   FilePlus,
   GitBranch,
   LogOut,
-  GraduationCap,
 } from "lucide-react";
 
 import { AuthContext } from "../../context/AuthContext";
@@ -31,9 +31,9 @@ const Sidebar = () => {
   return (
     <aside className="rh-sidebar">
       <div className="sidebar-logo">
-        <div className="logo-circle">
-          <GraduationCap size={22} color="#d69a28" />
-        </div>
+       <div className="logo-circle">
+  <img src={sapiensLogo} alt="Sapiens" />
+</div>
 
         <div>
           <h2>Sapiens</h2>
