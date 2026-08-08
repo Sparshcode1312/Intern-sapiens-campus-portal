@@ -128,6 +128,14 @@ function App() {
         </ProtectedRoute>
     }
 />
+          <Route
+  path="/regional-head/new-memo"
+  element={
+    <ProtectedRoute allowedRoles={["Regional Head"]}>
+      <NewMemo />
+    </ProtectedRoute>
+  }
+/>
 
         </Routes>
       </Router>
