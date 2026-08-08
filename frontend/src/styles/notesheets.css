@@ -1,156 +1,296 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap");
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+/* =========================================================
+   BASE
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
 }
 
-body{
-    background:#F7F5F2;
-    font-family:"Inter",sans-serif;
+html,
+body,
+#root {
+  min-height: 100%;
 }
 
-/* Main */
+body {
+  margin: 0;
 
-.notes-main{
-    flex:1;
-    margin-left:314px;
-    background:#F7F5F2;
-    min-height:100vh;
+  background: #fcfaf6;
 
-    padding-top:40px;
-    padding-left:48px;
-    padding-right:48px;
-    padding-bottom:32px;
+  font-family: "Inter", sans-serif;
 
-    max-width:calc(100vw - 314px);
-}
-/* Header */
-
-.notes-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-
-    margin-bottom:34px;
+  color: #172b52;
 }
 
-.notes-label{
-    font-size:14px;
-    letter-spacing:4px;
-    color:#C6922E;
-    font-weight:600;
-    margin-bottom:14px;
+/* =========================================================
+   PAGE LAYOUT
+   ========================================================= */
+
+.rh-layout {
+  min-height: 100vh;
+
+  background: #fcfaf6;
 }
 
-.notes-title{
-    font-family:"Cormorant Garamond",serif;
-    font-size:58px;
-    font-weight:500;
-    color:#16274D;
-    line-height:1.05;
+/*
+  Sidebar is fixed.
+  Therefore content starts exactly after 314px.
+*/
 
-    margin-bottom:10px;
+.notes-main {
+  min-height: 100vh;
+
+  margin-left: 314px;
+
+  width: calc(100% - 314px);
+
+  padding: 50px 48px 40px;
+
+  background: #fcfaf6;
 }
 
-.notes-subtitle{
-    font-size:18px;
-    color:#6B7280;
-    line-height:1.6;
-    max-width:720px;
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.notes-header {
+  width: 100%;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 40px;
+
+  margin-bottom: 28px;
 }
 
-/* Right Buttons */
-
-.notes-actions{
-    display:flex;
-    gap:12px;
-    align-items:center;
-    margin-top:18px;
+.notes-header > div:first-child {
+  min-width: 0;
 }
 
-.filter-btn{
-    width:238px;
-    height:46px;
-    background:#fff;
-    border:1px solid #ECE7DF;
-    border-radius:14px;
-    padding:0 18px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-size:16px;
-    color:#16274D;
-    cursor:pointer;
-    box-shadow:0 2px 8px rgba(0,0,0,.04);
-}
-.log-btn{
-    width:188px;
-    height:46px;
-    background:#16274D;
-    color:white;
-    border:none;
-    border-radius:14px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:10px;
-    font-size:16px;
-    font-weight:500;
-    cursor:pointer;
+.notes-label {
+  margin: 0 0 10px;
+
+  color: #c6922e;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  letter-spacing: 4px;
+  line-height: 1.2;
 }
 
-.log-btn:hover{
-    background:#0f1d3d;
+.notes-title {
+  margin: 0 0 8px;
+
+  color: #172b52;
+
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: 43px;
+  line-height: 1.02;
+
+  font-weight: 500;
 }
 
-/* Main White Card */
+.notes-subtitle {
+  max-width: 760px;
 
-.notes-card{
-    background:white;
-    border-radius:22px;
-    border:1px solid #ECE7DF;
-    min-height:470px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    box-shadow:0 3px 14px rgba(0,0,0,.05);
-}
-/* Empty State */
+  margin: 0;
 
-.empty-state{
-    text-align:center;
+  color: #66758d;
+
+  font-size: 18px;
+  line-height: 1.55;
 }
 
-.empty-state svg{
-    color:#5F6B7A;
-    margin-bottom:18px;
+/* =========================================================
+   HEADER ACTIONS
+   ========================================================= */
+
+.notes-actions {
+  flex: 0 0 auto;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 68px;
 }
 
-.empty-state h3{
-    font-family:"Cormorant Garamond",serif;
-    font-size:40px;
-    color:#16274D;
-    margin-bottom:12px;
+.filter-btn {
+  width: 236px;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 17px;
+
+  border: 1px solid #e7e2da;
+  border-radius: 13px;
+
+  background: #ffffff;
+
+  color: #172b52;
+
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+
+  box-shadow: 0 2px 8px rgba(18, 31, 56, 0.05);
+
+  cursor: pointer;
 }
 
-.empty-state p{
-    color:#6E7786;
-    font-size:19px;
+.filter-btn svg {
+  width: 18px;
+  height: 18px;
+
+  stroke-width: 1.8;
 }
+
+.filter-btn:hover {
+  border-color: #d8d0c5;
+}
+
+.log-btn {
+  width: 188px;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 0 18px;
+
+  border: 0;
+  border-radius: 13px;
+
+  background: #172f59;
+
+  color: #ffffff;
+
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  box-shadow: 0 6px 18px rgba(23, 47, 89, 0.12);
+}
+
+.log-btn svg {
+  width: 18px;
+  height: 18px;
+
+  stroke-width: 1.8;
+}
+
+.log-btn:hover {
+  background: #12264a;
+}
+
+/* =========================================================
+   MAIN CARD
+   ========================================================= */
+
+.notes-card {
+  width: 100%;
+
+  min-height: 276px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 50px;
+
+  border: 1px solid #ebe5dc;
+  border-radius: 20px;
+
+  background: #ffffff;
+
+  box-shadow: 0 2px 8px rgba(20, 31, 50, 0.04);
+}
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.empty-state {
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.empty-state svg {
+  width: 38px;
+  height: 38px;
+
+  margin-bottom: 14px;
+
+  color: #5f6b7a;
+
+  stroke-width: 1.7;
+}
+
+.empty-state h3 {
+  margin: 0 0 6px;
+
+  color: #172b52;
+
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: 28px;
+  line-height: 1.15;
+
+  font-weight: 500;
+}
+
+.empty-state p {
+  margin: 0;
+
+  color: #738097;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   NON-EMPTY NOTESHEET LIST
+   ========================================================= */
+
 .notes-list {
+  width: 100%;
+
   display: flex;
   flex-direction: column;
 }
 
 .notes-list-row {
+  width: 100%;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   gap: 16px;
-  padding: 18px 6px;
-  border-bottom: 1px solid #ebe8e2;
+
+  padding: 18px 8px;
+
+  border-bottom: 1px solid #ebe7df;
 }
 
 .notes-list-row:last-child {
@@ -158,21 +298,27 @@ body{
 }
 
 .notes-list-title {
-  color: #16274d;
+  color: #172b52;
+
   font-size: 17px;
   font-weight: 600;
 }
 
 .notes-list-meta {
-  margin-top: 4px;
-  color: #7c8ba1;
+  margin-top: 5px;
+
+  color: #7c899e;
+
   font-size: 14px;
 }
 
 .notes-status-pill {
   flex-shrink: 0;
+
   padding: 6px 14px;
+
   border-radius: 999px;
+
   font-size: 13px;
   font-weight: 700;
 }
@@ -190,4 +336,74 @@ body{
 .notes-status-rejected {
   background: #fbe6e6;
   color: #c23f3f;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .notes-main {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .notes-header {
+    flex-direction: column;
+  }
+
+  .notes-actions {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 900px) {
+  .notes-main {
+    width: 100%;
+    margin-left: 0;
+
+    padding: 32px 24px;
+  }
+
+  .notes-title {
+    font-size: 38px;
+  }
+
+  .notes-actions {
+    width: 100%;
+  }
+
+  .filter-btn,
+  .log-btn {
+    flex: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .notes-main {
+    padding: 28px 18px;
+  }
+
+  .notes-title {
+    font-size: 34px;
+  }
+
+  .notes-subtitle {
+    font-size: 16px;
+  }
+
+  .notes-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-btn,
+  .log-btn {
+    width: 100%;
+  }
+
+  .notes-card {
+    min-height: 250px;
+    padding: 30px 20px;
+  }
 }
