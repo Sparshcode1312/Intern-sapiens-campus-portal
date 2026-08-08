@@ -11,6 +11,7 @@ import {
   CheckCircle2,
   FileOutput,
   ChevronRight,
+   GraduationCap,
 } from "lucide-react";
 
 import { AuthContext } from "../../context/AuthContext";
@@ -108,10 +109,9 @@ const RegionalDashboard = () => {
       {/* ================= SIDEBAR ================= */}
       <aside className="rh-sidebar">
         <div className="rh-brand">
-          <div className="rh-brand-logo">
-            <span>SG</span>
-          </div>
-
+        <div className="rh-brand-logo">
+  <GraduationCap size={26} />
+</div>
           <div className="rh-brand-text">
             <div className="rh-brand-title">Sapiens</div>
             <div className="rh-brand-subtitle">REGIONAL HEAD</div>
