@@ -110,7 +110,7 @@ const RegionalDashboard = () => {
       <aside className="rh-sidebar">
         <div className="rh-brand">
         <div className="rh-brand-logo">
-  <GraduationCap size={26} />
+  <GraduationCap size={20} />
 </div>
           <div className="rh-brand-text">
             <div className="rh-brand-title">Sapiens</div>
