@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   LayoutDashboard,
   FileText,
@@ -14,39 +14,99 @@ import {
 } from "lucide-react";
 
 import { AuthContext } from "../../context/AuthContext";
+import api from "../../utils/api";
 import "./regional-head.css";
 
-const StatCard = ({ label, value, icon: Icon, iconClass = "" }) => {
+const StatCard = ({ label, value, icon: Icon, iconClass = "", onClick, active }) => {
   return (
-    <div className="rh-stat-card">
+    <button
+      type="button"
+      className={`rh-stat-card${onClick ? " rh-stat-card-clickable" : ""}${active ? " rh-stat-card-active" : ""}`}
+      onClick={onClick}
+    >
       <div className="rh-stat-card-top">
         <span>{label}</span>
         <Icon size={22} className={iconClass} />
       </div>
 
       <div className="rh-stat-value">{value}</div>
-    </div>
+    </button>
   );
 };
+
+const NAV_ITEMS = [
+  { label: "Overview", path: "/regional-head", icon: LayoutDashboard },
+  { label: "Notesheets", path: "/regional-head/notesheets", icon: FileText },
+  { label: "New Memo", path: "/regional-head/new-memo", icon: FilePlus2 },
+  { label: "Approval Flow", path: "/regional-head/approval-flow", icon: GitBranch },
+];
 
 const RegionalDashboard = () => {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const goTo = (path) => {
-    navigate(path);
-  };
+  const [stats, setStats] = useState({
+    notesheets: 0,
+    pending: 0,
+    approved: 0,
+    memosIssued: 0,
+    recent: [],
+    byDepartment: [],
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [activeFilter, setActiveFilter] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadStats = async () => {
+      try {
+        setLoading(true);
+        const response = await api.get("/api/requirements/dashboard-stats");
+        if (isMounted) {
+          setStats(response.data);
+          setError(null);
+        }
+      } catch (err) {
+        console.error("Failed to load dashboard stats:", err);
+        if (isMounted) setError("Couldn't load live data. Showing defaults.");
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    };
+
+    loadStats();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const goTo = (path) => navigate(path);
 
   const handleLogout = () => {
     logout();
     navigate("/login", { replace: true });
   };
 
+  const handleStatClick = (filterKey, status) => {
+    setActiveFilter(filterKey);
+    navigate(
+      status
+        ? `/regional-head/notesheets?status=${encodeURIComponent(status)}`
+        : "/regional-head/notesheets"
+    );
+  };
+
+  const handleDepartmentClick = (department) => {
+    navigate(`/regional-head/notesheets?department=${encodeURIComponent(department)}`);
+  };
+
   return (
     <div className="rh-layout">
       {/* ================= SIDEBAR ================= */}
       <aside className="rh-sidebar">
-        {/* Brand */}
         <div className="rh-brand">
           <div className="rh-brand-logo">
             <span>SG</span>
@@ -58,56 +118,24 @@ const RegionalDashboard = () => {
           </div>
         </div>
 
-        {/* Navigation */}
         <nav className="rh-sidebar-nav">
-          <button
-            type="button"
-            className="rh-nav-item rh-nav-item-active"
-            onClick={() => goTo("/regional-head")}
-          >
-            <LayoutDashboard size={20} />
-            <span>Overview</span>
-          </button>
-
-          <button
-            type="button"
-            className="rh-nav-item"
-            onClick={() => goTo("/regional-head/notesheets")}
-          >
-            <FileText size={20} />
-            <span>Notesheets</span>
-          </button>
-
-          <button
-            type="button"
-            className="rh-nav-item"
-            onClick={() => goTo("/regional-head/new-memo")}
-          >
-            <FilePlus2 size={20} />
-            <span>New Memo</span>
-          </button>
-
-          <button
-            type="button"
-            className="rh-nav-item"
-            onClick={() => goTo("/regional-head/approval-flow")}
-          >
-            <GitBranch size={20} />
-            <span>Approval Flow</span>
-          </button>
+          {NAV_ITEMS.map(({ label, path, icon: Icon }) => (
+            <button
+              key={path}
+              type="button"
+              className={`rh-nav-item${location.pathname === path ? " rh-nav-item-active" : ""}`}
+              onClick={() => goTo(path)}
+            >
+              <Icon size={20} />
+              <span>{label}</span>
+            </button>
+          ))}
         </nav>
 
-        {/* User section */}
         <div className="rh-sidebar-bottom">
-          <div className="rh-user-email">
-            {user?.email || "regional@sapiens.edu"}
-          </div>
+          <div className="rh-user-email">{user?.email || "regional@sapiens.edu"}</div>
 
-          <button
-            type="button"
-            className="rh-signout-button"
-            onClick={handleLogout}
-          >
+          <button type="button" className="rh-signout-button" onClick={handleLogout}>
             <LogOut size={19} />
             <span>Sign out</span>
           </button>
@@ -120,15 +148,10 @@ const RegionalDashboard = () => {
           {/* Hero */}
           <section className="rh-hero">
             <div className="rh-hero-left">
-              <div className="rh-eyebrow">
-                REGIONAL HEAD · OVERVIEW
-              </div>
-
+              <div className="rh-eyebrow">REGIONAL HEAD · OVERVIEW</div>
               <h1>Good day, Regional Head</h1>
-
-              <p>
-                Notesheets from across the institutes, awaiting your action.
-              </p>
+              <p>Notesheets from across the institutes, awaiting your action.</p>
+              {error && <p className="rh-error-note">{error}</p>}
             </div>
 
             <div className="rh-hero-right">
@@ -147,27 +170,34 @@ const RegionalDashboard = () => {
           <section className="rh-stats-grid">
             <StatCard
               label="NOTESHEETS"
-              value="0"
+              value={loading ? "…" : stats.notesheets}
               icon={FileCheck2}
+              onClick={() => handleStatClick("all", null)}
+              active={activeFilter === "all"}
             />
 
             <StatCard
               label="PENDING"
-              value="0"
+              value={loading ? "…" : stats.pending}
               icon={Clock3}
               iconClass="rh-icon-pending"
+              onClick={() => handleStatClick("pending", "Pending")}
+              active={activeFilter === "pending"}
             />
 
             <StatCard
               label="APPROVED / COMPLETED"
-              value="0"
+              value={loading ? "…" : stats.approved}
               icon={CheckCircle2}
+              onClick={() => handleStatClick("approved", "Approved")}
+              active={activeFilter === "approved"}
             />
 
             <StatCard
               label="MEMOS ISSUED"
-              value="2"
+              value={loading ? "…" : stats.memosIssued}
               icon={FileOutput}
+              onClick={() => goTo("/regional-head/new-memo")}
             />
           </section>
 
@@ -188,18 +218,36 @@ const RegionalDashboard = () => {
                 </button>
               </div>
 
-              <div className="rh-empty-state">
-                <div className="rh-empty-icon">
-                  <FileText size={28} />
+              {!loading && stats.recent.length > 0 ? (
+                <div className="rh-recent-list">
+                  {stats.recent.map((item) => (
+                    <button
+                      key={item._id}
+                      type="button"
+                      className="rh-recent-row"
+                      onClick={() => goTo(`/regional-head/notesheets?id=${item._id}`)}
+                    >
+                      <div className="rh-recent-row-main">
+                        <span className="rh-recent-title">{item.title}</span>
+                        <span className="rh-recent-meta">
+                          {item.department} · {item.centreName}
+                        </span>
+                      </div>
+                      <span className={`rh-status-pill rh-status-${item.status.toLowerCase()}`}>
+                        {item.status}
+                      </span>
+                    </button>
+                  ))}
                 </div>
-
-                <h3>No notesheets yet</h3>
-
-                <p>
-                  Once departments submit notesheets they'll
-                  appear here.
-                </p>
-              </div>
+              ) : (
+                <div className="rh-empty-state">
+                  <div className="rh-empty-icon">
+                    <FileText size={28} />
+                  </div>
+                  <h3>No notesheets yet</h3>
+                  <p>Once departments submit notesheets they'll appear here.</p>
+                </div>
+              )}
             </div>
 
             {/* Department */}
@@ -209,35 +257,27 @@ const RegionalDashboard = () => {
               </div>
 
               <div className="rh-department-list">
-                <div className="rh-department-row">
-                  <span>Marketing</span>
-                  <strong>0</strong>
-                </div>
-
-                <div className="rh-department-row">
-                  <span>HR</span>
-                  <strong>0</strong>
-                </div>
-
-                <div className="rh-department-row">
-                  <span>Operations</span>
-                  <strong>0</strong>
-                </div>
-
-                <div className="rh-department-row">
-                  <span>Academics</span>
-                  <strong>0</strong>
-                </div>
-
-                <div className="rh-department-row">
-                  <span>Events</span>
-                  <strong>0</strong>
-                </div>
-
-                <div className="rh-department-row">
-                  <span>Administration</span>
-                  <strong>0</strong>
-                </div>
+                {(stats.byDepartment.length
+                  ? stats.byDepartment
+                  : [
+                      { department: "Marketing", count: 0 },
+                      { department: "HR", count: 0 },
+                      { department: "Operations", count: 0 },
+                      { department: "Academics", count: 0 },
+                      { department: "Events", count: 0 },
+                      { department: "Administration", count: 0 },
+                    ]
+                ).map(({ department, count }) => (
+                  <button
+                    key={department}
+                    type="button"
+                    className="rh-department-row"
+                    onClick={() => handleDepartmentClick(department)}
+                  >
+                    <span>{department}</span>
+                    <strong>{loading ? "…" : count}</strong>
+                  </button>
+                ))}
               </div>
             </div>
           </section>
