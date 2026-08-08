@@ -66,9 +66,9 @@ const seedUsers = async () => {
       name: 'Jane Cluster',
       email: 'cluster@sapiens.edu',
       role: 'Cluster Manager',
-      centreName: 'North Region',
-      designationLabel: 'Cluster Manager - North',
-      customPassword: 'password123',
+      centreName: 'SHS Dhawas',
+      designationLabel: 'Cluster Manager',
+      customPassword: 'cluster@admin123',
     },
     {
       name: 'Michael Director',

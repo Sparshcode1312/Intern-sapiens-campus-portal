@@ -23,6 +23,10 @@ import ApprovalFlow from "./pages/RegionalHead/ApprovalFlow";
 import HQPortal from "./pages/hq/HQPortal";
 import DirectorConsole from "./pages/director/DirectorConsole";
 
+import ClusterLayout from "./pages/clusterManager/ClusterLayout";
+import ClusterDashboard from "./pages/clusterManager/ClusterDashboard";
+import NewWorkProposal from "./pages/clusterManager/NewWorkProposal";
+
 function App() {
   return (
     <AuthProvider>
@@ -188,6 +192,19 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          {/* Cluster Manager Portal */}
+          <Route
+            path="/cluster-manager"
+            element={
+              <ProtectedRoute allowedRoles={["Cluster Manager"]}>
+                <ClusterLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<ClusterDashboard />} />
+            <Route path="new-proposal" element={<NewWorkProposal />} />
+          </Route>
 
         </Routes>
       </Router>

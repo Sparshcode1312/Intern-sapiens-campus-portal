@@ -6,7 +6,7 @@ import '../styles/login.css';
 
 const roleToPath = {
   'Centre Head': '/dashboard/centre-head',
-  'Cluster Manager': '/dashboard/cluster-manager',
+  'Cluster Manager': '/cluster-manager',
   'Department Head': '/dashboard/department-head',
   'Regional Head': '/regional-head',
   Director: '/dashboard/director',
